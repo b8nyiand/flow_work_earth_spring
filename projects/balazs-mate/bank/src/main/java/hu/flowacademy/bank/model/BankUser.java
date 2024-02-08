@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import jakarta.persistence.Id;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -17,11 +19,14 @@ import java.util.List;
 public class BankUser {
 
     @Id
+    @Column(unique = true)
     private String username;
     private String fullname;
     private LocalDate creationDate;
 
     @JsonIgnore
+    @OnDelete(action = OnDeleteAction.CASCADE)
+//    @OnDelete(action = OnDeleteAction.SET_NULL)
     @OneToMany(mappedBy = "BankUser")
     private List<BankAccount> accounts;
 

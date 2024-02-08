@@ -17,23 +17,25 @@ public class BankAccount {
     private Long id;
     private String accountNumber;
     private Integer balance;
-    private String currency;
+    @Enumerated(EnumType.STRING)
+    private Currency currency;
     private LocalDate creationDate;
 
     @ManyToOne
     @JoinColumn(name = "username")
     private BankUser BankUser;
 
-    public BankAccount(String accountNumber, Integer balance, String currency, hu.flowacademy.bank.model.BankUser bankUser) {
+    public BankAccount(String accountNumber, Integer balance, Currency currency, hu.flowacademy.bank.model.BankUser bankUser) {
         this.accountNumber = accountNumber;
         this.balance = balance;
         this.currency = currency;
         BankUser = bankUser;
     }
 
-    public BankAccount(String accountNumber, Integer balance, String currency) {
+    public BankAccount(String accountNumber, Integer balance, Currency currency) {
         this.accountNumber = accountNumber;
         this.balance = balance;
         this.currency = currency;
     }
+
 }
