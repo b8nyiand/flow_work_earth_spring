@@ -21,14 +21,19 @@ public class BankAccount {
     private LocalDate creationDate;
 
     @ManyToOne
-    @JoinColumn(name = "username", nullable = false)
+    @JoinColumn(name = "username")
     private BankUser BankUser;
 
-    public BankAccount(Long id, String accountNumber, Integer balance, String currency, hu.flowacademy.bank.model.BankUser bankUser) {
-        this.id = id;
+    public BankAccount(String accountNumber, Integer balance, String currency, hu.flowacademy.bank.model.BankUser bankUser) {
         this.accountNumber = accountNumber;
         this.balance = balance;
         this.currency = currency;
         BankUser = bankUser;
+    }
+
+    public BankAccount(String accountNumber, Integer balance, String currency) {
+        this.accountNumber = accountNumber;
+        this.balance = balance;
+        this.currency = currency;
     }
 }
