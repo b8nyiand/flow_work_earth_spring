@@ -44,7 +44,7 @@ public class JobsApplication {
 				Job job5 = new Job("Szabó", 230000, "Szabó keményen dolgozik.", user2, LocalDate.now());
 				Job job6 = new Job("Cukrász", 310000, "A cukrász kreatív édességeket készít és díszít, hogy azok élvezetet és örömet nyújtsanak az embereknek.", user2, LocalDate.now());
 				Job job7 = new Job("Zenész", 200000, "A zenész hivatása az emberek szívébe és lelkébe énekelni vagy játszani.", user2, LocalDate.now());
-				Job job8 = new Job("Lakatos", 2900000, "A lakatos eredetileg zárak, lakatok, kulcsok illetve épület- vagy bútorvasalások készítésével illetve javításával foglalkozó szakember volt.", user2, LocalDate.now());
+				Job job8 = new Job("Lakatos", 290000, "A lakatos eredetileg zárak, lakatok, kulcsok illetve épület- vagy bútorvasalások készítésével illetve javításával foglalkozó szakember volt.", user2, LocalDate.now());
 				jobRepository.save(job5);
 				jobRepository.save(job6);
 				jobRepository.save(job7);
