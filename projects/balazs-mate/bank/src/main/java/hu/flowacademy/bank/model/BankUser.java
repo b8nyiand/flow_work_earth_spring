@@ -27,17 +27,19 @@ public class BankUser {
     @JsonIgnore
     @OnDelete(action = OnDeleteAction.CASCADE)
 //    @OnDelete(action = OnDeleteAction.SET_NULL)
-    @OneToMany(mappedBy = "BankUser")
+    @OneToMany(mappedBy = "bankUser")
     private List<BankAccount> accounts;
 
-    public BankUser(String username, String fullname, List<BankAccount> accounts) {
+
+    public BankUser(String username, String fullname, LocalDate creationDate) {
         this.username = username;
         this.fullname = fullname;
-        this.accounts = accounts;
+        this.creationDate = creationDate;
     }
 
     public BankUser(String username, String fullname) {
         this.username = username;
         this.fullname = fullname;
+        this.creationDate = LocalDate.now();
     }
 }

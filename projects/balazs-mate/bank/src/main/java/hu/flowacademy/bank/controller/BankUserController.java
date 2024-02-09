@@ -44,7 +44,7 @@ public class BankUserController {
 
     //---------------------------------------------------------------------------//
 
-    @PostMapping("/update")
+    @PutMapping("/update")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public BankUser update(@RequestBody BankUser bankUser) {
         return bankUserService.save(bankUser);
@@ -59,4 +59,5 @@ public class BankUserController {
     }
 
     //---------------------------------------------------------------------------//
+
 }

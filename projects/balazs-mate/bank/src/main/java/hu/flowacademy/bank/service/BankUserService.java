@@ -5,6 +5,7 @@ import hu.flowacademy.bank.repository.BankUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -16,6 +17,9 @@ public class BankUserService {
     //---------------------------------------------------------------------------//
 
     public BankUser save(BankUser bankUser) {
+        if (bankUser.getCreationDate() == null) {
+            bankUser.setCreationDate(LocalDate.now());
+        }
         return bankUserRepository.save(bankUser);
     }
 
@@ -28,7 +32,6 @@ public class BankUserService {
     public BankUser findByUsername(String username) {
         return bankUserRepository.findByUsername(username);
     }
-
 
 
     public List<BankUser> findByFullname(String fullname) {
