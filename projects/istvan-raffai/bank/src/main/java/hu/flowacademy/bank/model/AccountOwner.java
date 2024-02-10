@@ -1,8 +1,8 @@
 package hu.flowacademy.bank.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+
 
 import java.time.LocalDate;
 import java.util.List;
@@ -17,6 +17,7 @@ public class AccountOwner {
     private LocalDate creationDate;
 
     @OneToMany(mappedBy = "accountOwner")
+    @JsonIgnore
     private List<BankAccount> accounts;
 
     public AccountOwner() {
