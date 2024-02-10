@@ -37,7 +37,7 @@ public class UserService {
         userRepository.deleteById(userName);
     }
 
-    public User userByUserName(String userName){
+    public User listUserByUserName(String userName){
         Optional<User> userOptional = userRepository.findById(userName);
         return userOptional.orElse(null);
     }

@@ -36,7 +36,7 @@ public class AdsApplication {
 				User user1 = new User("probi", "Proba Robert", LocalDate.now());
 				userRepository.save(user1);
 
-				Ad ad = new Ad("Ruha", 1500, "baba body", user);
+				Ad ad = new Ad("Ruha", 1500, "baba body", user, LocalDate.now());
 				adRepository.save(ad);
 			}
 		};

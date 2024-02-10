@@ -40,11 +40,11 @@ public class Ad {
     @JsonIgnore
     private User user;
 
-    public Ad(String title, Integer price, String description, User user) {
+    public Ad(String title, Integer price, String description, User user, LocalDate creationDate) {
         this.title = title;
         this.price = price;
         this.description = description;
-        this.creationDate = LocalDate.now();
+        this.creationDate = creationDate;
         this.user = user;
     }
 

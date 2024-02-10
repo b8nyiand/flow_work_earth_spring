@@ -30,7 +30,6 @@ public class User {
     @CreatedDate
     private LocalDate creationDate;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "user")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<Ad> ads;
