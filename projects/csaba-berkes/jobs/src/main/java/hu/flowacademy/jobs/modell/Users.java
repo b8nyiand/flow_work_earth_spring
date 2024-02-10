@@ -13,7 +13,7 @@ public class Users {
     private String username;
     private String fullname;
     private LocalDate creationDate;
-    @OneToMany(mappedBy = "users")
+    @OneToMany(orphanRemoval = true, cascade = CascadeType.REMOVE, mappedBy = "users")
     private List<Job> jobList;
 
     public Users() {

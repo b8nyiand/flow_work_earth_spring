@@ -31,5 +31,8 @@ public class UsersService {
     public List<Users> usersList(){
         return usersRepository.findAll();
     }
+    public List<Users> findByFullnameLike(){
+        return usersRepository.findByFullnameLike("%Molnar%");
+    }
 
 }

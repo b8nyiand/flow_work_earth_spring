@@ -36,4 +36,8 @@ public class UsersController {
     public List<Users> listAllUsers(){
         return usersService.usersList();
     }
+    @GetMapping("/molnar")
+    public List<Users> findByFullnameLike(){
+        return usersService.findByFullnameLike();
+    }
 }

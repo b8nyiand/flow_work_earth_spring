@@ -16,6 +16,7 @@ public class Job {
     private int salary;
     private String description;
     @ManyToOne
+//    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "username", nullable = false)
     @JsonIgnore
     private Users users;
