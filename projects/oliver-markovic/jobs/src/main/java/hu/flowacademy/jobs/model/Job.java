@@ -1,30 +1,36 @@
 package hu.flowacademy.jobs.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
 @Entity
+@Table(name = "job")
 public class Job {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
     private String title;
     private int salary;
     private String description;
-    private String userName;
     private LocalDate creationDate;
 
-    public Job(String title, int salary, String description, String userName, LocalDate creationDate) {
+    @ManyToOne
+    @JoinColumn(name = "username", nullable = false)
+    private User user;
+
+    public Job(String title, int salary, String description,
+               LocalDate creationDate, User user) {
         this.title = title;
         this.salary = salary;
         this.description = description;
-        this.userName = userName;
         this.creationDate = creationDate;
+        this.user = user;
+    }
+
+    public Job() {
     }
 
     public String getTitle() {
@@ -51,14 +57,6 @@ public class Job {
         this.description = description;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
     public LocalDate getCreationDate() {
         return creationDate;
     }
@@ -73,5 +71,17 @@ public class Job {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

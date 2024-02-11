@@ -1,24 +1,38 @@
 package hu.flowacademy.jobs.model;
 
-import java.time.LocalDate;
+import jakarta.persistence.*;
 
+import java.time.LocalDate;
+import java.util.List;
+
+@Entity
+@Table(name = "user")
 public class User {
-    private String userName;
-    private  String fullName;
-    LocalDate creationDate;
+
+    @Id
+    private String username;
+    private String fullName;
+    private LocalDate creationDate;
+
+    @OneToMany(mappedBy = "user")
+    private List<Job> job;
+
 
     public User(String userName, String fullName, LocalDate creationDate) {
-        this.userName = userName;
+        this.username = userName;
         this.fullName = fullName;
         this.creationDate = creationDate;
     }
 
-    public String getUserName() {
-        return userName;
+        public User() {
+        }
+
+        public String getUserName() {
+        return username;
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        this.username = userName;
     }
 
     public String getFullName() {
@@ -36,4 +50,5 @@ public class User {
     public void setCreationDate(LocalDate creationDate) {
         this.creationDate = creationDate;
     }
+
 }
