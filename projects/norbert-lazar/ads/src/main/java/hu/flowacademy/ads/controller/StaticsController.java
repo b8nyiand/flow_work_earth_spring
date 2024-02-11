@@ -29,9 +29,21 @@ public class StaticsController {
     }
 
     @GetMapping
+    @RequestMapping("/price-greater-than-4000")
+    public List<Ad> priceGreaterThan4000(){
+        return adRepository.findByPriceGreaterThan(4000);
+    }
+
+    @GetMapping
     @RequestMapping("/price-less-than/{price}")
     public List<Ad> priceLessThan(@PathVariable Integer price){
         return adRepository.findByPriceLessThan(price);
+    }
+
+    @GetMapping
+    @RequestMapping("/price-less-than-3000")
+    public List<Ad> priceLessThan3000(){
+        return adRepository.findByPriceLessThan(3000);
     }
 
     /**

@@ -10,4 +10,6 @@ public interface UserRepository extends JpaRepository<User, String> {
     List<User> findByFullNameLike(String fullName);
 
     List<User> findByFullNameContaining(String name);
+
+    boolean existsById(String userName);
 }
