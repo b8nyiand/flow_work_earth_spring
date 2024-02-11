@@ -32,8 +32,8 @@ public class UserService {
 
     // 4. user lekérése teljes név alapján:
 
-    public List<User> getUsersByName(String fullName) {
-        return userRepository.findByFullName(fullName);
+    public List<User> getUsersByUserName(String userName) {
+        return userRepository.findByUserName(userName);
     }
 
 
