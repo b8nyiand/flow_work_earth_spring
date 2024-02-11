@@ -1,46 +1,56 @@
 package hu.flowacademy.jobs.model;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
+@Table(name = "t_user")
 public class User {
 
     @Id
-    private String username;
-    private String fullname;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    private String userName;
+    private String fullName;
     private LocalDate creationDate;
-    @ManyToOne
-    @JoinColumn(name = "job_id", nullable = false)
-    @JsonIgnore
-    private Job job;
 
-
+    @OneToMany(mappedBy = "user")
+    private List<Jobs> jobsList;
 
     public User() {
     }
 
-    public User(String fullname, LocalDate creationDate, Job job) {
-        this.fullname = fullname;
+    public User(String userName, String fullName, LocalDate creationDate) {
+        this.userName = userName;
+        this.fullName = fullName;
         this.creationDate = creationDate;
-        this.job = job;
     }
 
-    public String getUsername() {
-        return username;
+    public Long getId() {
+        return id;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getFullname() {
-        return fullname;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public LocalDate getCreationDate() {
@@ -51,11 +61,7 @@ public class User {
         this.creationDate = creationDate;
     }
 
-    public Job getJob() {
-        return job;
-    }
-
-    public void setJob(Job job) {
-        this.job = job;
+    public List<Jobs> getJobsList() {
+        return jobsList;
     }
 }

@@ -1,35 +1,47 @@
 package hu.flowacademy.jobs.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.List;
 
 @Entity
-public class Job {
-
+public class Jobs {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     private String title;
-    private int salary;
+    private Integer salary;
     private String description;
-    private String username;
+
+    private String userName; // foreign key
     private LocalDate creationDate;
 
-    @OneToMany(mappedBy = "jobs")
-    private List<User> users;
 
-    public Job() {
+    @ManyToOne
+    @JoinColumn(name = "user_id",nullable = false) // ezen keresztül kapcsolódik
+    @JsonIgnore
+    private User user;
+
+    public Jobs() {
     }
 
-    public Job(String title, int salary, String description, String username, LocalDate creationDate) {
+    public Jobs(String title, Integer salary, String description, String userName, LocalDate creationDate, User user) {
         this.title = title;
         this.salary = salary;
         this.description = description;
-        this.username = username;
+        this.userName = userName;
         this.creationDate = creationDate;
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Long getId() {
@@ -48,11 +60,11 @@ public class Job {
         this.title = title;
     }
 
-    public int getSalary() {
+    public Integer getSalary() {
         return salary;
     }
 
-    public void setSalary(int salary) {
+    public void setSalary(Integer salary) {
         this.salary = salary;
     }
 
@@ -64,12 +76,12 @@ public class Job {
         this.description = description;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public LocalDate getCreationDate() {
@@ -78,25 +90,5 @@ public class Job {
 
     public void setCreationDate(LocalDate creationDate) {
         this.creationDate = creationDate;
-    }
-
-    public List<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<User> users) {
-        this.users = users;
-    }
-
-    @Override
-    public String toString() {
-        return "Job{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", salary=" + salary +
-                ", description='" + description + '\'' +
-                ", username='" + username + '\'' +
-                ", creationDate=" + creationDate +
-                '}';
     }
 }
