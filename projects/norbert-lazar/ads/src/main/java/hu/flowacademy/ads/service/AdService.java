@@ -25,11 +25,6 @@ public class AdService {
         if (existUser.isPresent()) {
             User user = existUser.get();
             ad.setUser(user);
-
-            if (ad.getCreationDate() == null) {
-                ad.setCreationDate(LocalDate.now());
-            }
-
         }
 
         return adRepository.save(ad);

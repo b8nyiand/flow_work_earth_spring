@@ -15,6 +15,6 @@ public interface AdRepository extends JpaRepository<Ad, Long> {
 
     List<Ad> findByPriceLessThan(Integer price);
 
-    List<Ad> findByTitleLike(String title);
+    List<Ad> findByTitleContaining(String title);
 
 }

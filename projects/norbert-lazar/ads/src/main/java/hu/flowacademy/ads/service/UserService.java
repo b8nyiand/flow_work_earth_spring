@@ -1,5 +1,6 @@
 package hu.flowacademy.ads.service;
 
+import hu.flowacademy.ads.exceptionHandler.UserExistException;
 import hu.flowacademy.ads.model.User;
 import hu.flowacademy.ads.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +19,18 @@ public class UserService {
     private UserRepository userRepository;
 
     public User addUser(User user) {
-        if (user.getCreationDate() == null) {
-            user.setCreationDate(LocalDate.now());
+        if(!userIsExist(user)){
+            if (user.getCreationDate() == null) {
+                user.setCreationDate(LocalDate.now());
+            }
+            return userRepository.save(user);
+        } else {
+            throw new UserExistException(String.format("User already exists with this username: %s", user.getUserName()));
         }
-        return userRepository.save(user);
+    }
+
+    public boolean userIsExist(User user){
+        return userRepository.existsById(user.getUserName());
     }
 
     public User modifyUser(User user) {

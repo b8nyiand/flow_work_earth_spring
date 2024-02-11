@@ -73,7 +73,7 @@ public class StaticsController {
     @GetMapping
     @RequestMapping("/ad-title/{title}")
     public List<Ad> findAdByTitle(@PathVariable String title){
-        return adRepository.findByTitleLike(title);
+        return adRepository.findByTitleContaining(title);
     }
 
 
