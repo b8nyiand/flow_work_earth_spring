@@ -1,5 +1,6 @@
 package hu.flowacademy.jobs.service;
 
+import hu.flowacademy.jobs.modell.Job;
 import hu.flowacademy.jobs.modell.Users;
 import hu.flowacademy.jobs.repository.JobRepository;
 import hu.flowacademy.jobs.repository.UsersRepository;
@@ -18,10 +19,11 @@ public class UsersService {
     public Users addUser(Users users){
         return usersRepository.save(users);
     }
+    //FIXME Update user
     public Users updateUser(Users users){
         return usersRepository.save(users);
     }
-
+    // FIXME Delete user
     public void deleteUser(Users username){
         usersRepository.delete(username);
     }
@@ -33,6 +35,9 @@ public class UsersService {
     }
     public List<Users> findByFullnameLike(){
         return usersRepository.findByFullnameLike("%Molnar%");
+    }
+    public  List<Users> jobByUsername(String username){
+        return usersRepository.findByUsername(username);
     }
 
 }

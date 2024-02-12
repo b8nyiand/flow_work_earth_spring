@@ -1,6 +1,7 @@
 package hu.flowacademy.jobs.service;
 
 import hu.flowacademy.jobs.modell.Job;
+import hu.flowacademy.jobs.modell.Users;
 import hu.flowacademy.jobs.repository.JobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,7 @@ public class JobService {
     private JobRepository jobRepository;
     @Autowired
     private UsersService usersService;
-
+    //FIXME Add job
     public Job addJobToUser(Job job){
         return jobRepository.save(job);
     }
@@ -31,4 +32,6 @@ public class JobService {
     public List<Job> findByAnySalaryGreaterThan(int salary){
         return jobRepository.findBySalaryGreaterThan(salary);
     }
+
+
 }

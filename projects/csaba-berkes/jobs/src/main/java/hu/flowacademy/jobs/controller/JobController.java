@@ -12,8 +12,10 @@ import java.util.List;
 public class JobController {
     @Autowired
     private JobService jobService;
+
+    //FIXME Add job
     @PostMapping("/addjob")
-    private Job addJobToUser(@RequestBody Job job){
+    private Job addJobToUser(@RequestBody Job job) {
         return jobService.addJobToUser(job);
     }
 
@@ -27,7 +29,7 @@ public class JobController {
         return jobService.findByLessSalary();
     }
     @GetMapping("/spring")
-    private List<Job> findByTitle(){
+    private List<Job> findByTitle() {
         return jobService.findByTitle();
     }
     @GetMapping("/slarygreatherthen/{salary}")
