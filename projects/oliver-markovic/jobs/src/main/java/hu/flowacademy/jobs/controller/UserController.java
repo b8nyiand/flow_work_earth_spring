@@ -7,6 +7,7 @@ import hu.flowacademy.jobs.service.JobService;
 import hu.flowacademy.jobs.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -53,26 +54,33 @@ public class UserController {
         return userService.updateUser(user);
     }
 
-    @PostMapping("/add-job")
+    @PostMapping("/add-job/{username}")
     @ResponseStatus(HttpStatus.CREATED)
     public Job addJob(@PathVariable String username, @RequestBody Job job) {
         User user = userService.getUserByName(username);
-        if(user == null) {
-            userRepository.save(new User("Roland", "Hianyozta Roland", LocalDate.now()));
-            user = userService.getUserByName(username);
-        }
-        job.setUser(user);
-        return jobService.addJob(job);
+        return userService.addUserWithJob(user, job);
     }
 
-    @PutMapping("/update-job")
-    public Job updateJob(@RequestBody Job job) {
+    @PutMapping("/update-job/{id}")
+    public Job updateJob(@PathVariable Long id, @RequestBody Job job) {
+        Optional<Job> existingJob = jobService.getJobById(id);
+        if (existingJob.isEmpty()) {
+            throw new RuntimeException("Job not found with id " + id);
+        }
+        job.setId(id);
         return jobService.updateJob(job);
     }
 
-    @DeleteMapping("/delete-job-by-id/{id}")
-    public void deleteJob(@PathVariable Long id) {
+    @DeleteMapping("/delete-job/{id}")
+    public ResponseEntity<Void> deleteJob(@PathVariable Long id) {
+        Optional<Job> existingJob = jobService.getJobById(id);
+
+        if (existingJob.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
         jobService.deleteJob(id);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/get-users-jobs/{username}")

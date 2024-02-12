@@ -24,10 +24,10 @@ public class User {
         this.creationDate = creationDate;
     }
 
-        public User() {
-        }
+    public User() {
+    }
 
-        public String getUserName() {
+    public String getUserName() {
         return username;
     }
 
@@ -50,5 +50,6 @@ public class User {
     public void setCreationDate(LocalDate creationDate) {
         this.creationDate = creationDate;
     }
+
 
 }
