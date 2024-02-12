@@ -1,6 +1,7 @@
 package hu.flowacademy.jobs.controller;
 
 import hu.flowacademy.jobs.modell.Job;
+import hu.flowacademy.jobs.modell.Users;
 import hu.flowacademy.jobs.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -35,5 +36,9 @@ public class JobController {
     @GetMapping("/slarygreatherthen/{salary}")
     private List<Job> findByAnySalaryGreaterThan(@PathVariable int salary) {
         return jobService.findByAnySalaryGreaterThan(salary);
+    }
+    @GetMapping("/userjobs/{id}")
+    private Job jobById(@PathVariable Long id) {
+        return jobService.findById(id);
     }
 }

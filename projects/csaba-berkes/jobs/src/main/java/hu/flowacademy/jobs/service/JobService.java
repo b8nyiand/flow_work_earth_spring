@@ -5,8 +5,11 @@ import hu.flowacademy.jobs.modell.Users;
 import hu.flowacademy.jobs.repository.JobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class JobService {
@@ -32,6 +35,12 @@ public class JobService {
     public List<Job> findByAnySalaryGreaterThan(int salary){
         return jobRepository.findBySalaryGreaterThan(salary);
     }
-
+    public Job findById(Long id) {
+        Optional<Job> jobOptional = jobRepository.findById(id);
+        if (jobOptional.isPresent()) {
+            return jobOptional.get();
+        }
+        throw new RuntimeException("No user found");
+    }
 
 }
