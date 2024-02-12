@@ -11,6 +11,12 @@ import java.util.List;
 public class JobService {
     @Autowired
     private JobRepository jobRepository;
+    @Autowired
+    private UsersService usersService;
+
+    public Job addJobToUser(Job job){
+        return jobRepository.save(job);
+    }
 
     public List<Job> findBySalary() {
         return jobRepository.findBySalaryGreaterThan(1000000);
