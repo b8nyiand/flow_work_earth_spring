@@ -1,11 +1,10 @@
 package hu.flowacademy.ads.service;
 
-import hu.flowacademy.ads.exceptionHandler.UserExistException;
+import hu.flowacademy.ads.exceptionHandler.ForbiddenException;
+import hu.flowacademy.ads.exceptionHandler.NotFoundException;
 import hu.flowacademy.ads.model.User;
 import hu.flowacademy.ads.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -19,49 +18,44 @@ public class UserService {
     private UserRepository userRepository;
 
     public User addUser(User user) {
-        if(!userIsExist(user)){
+        if (!userIsExist(user.getUserName())) {
             if (user.getCreationDate() == null) {
                 user.setCreationDate(LocalDate.now());
             }
             return userRepository.save(user);
         } else {
-            throw new UserExistException(String.format("User already exists with this username: %s", user.getUserName()));
+            throw new ForbiddenException(String.format("User already exists with this username: %s", user.getUserName()));
         }
     }
 
-    public boolean userIsExist(User user){
-        return userRepository.existsById(user.getUserName());
+    public boolean userIsExist(String userName) {
+        return userRepository.existsById(userName);
     }
 
     public User modifyUser(User user) {
-        Optional<User> validUser = userRepository.findById(user.getUserName());
-        if (validUser.isPresent()) {
+        if (userIsExist(user.getUserName())) {
             if (user.getCreationDate() == null) {
                 user.setCreationDate(LocalDate.now());
             }
-            userRepository.save(user);
+            return userRepository.save(user);
+        } else {
+            throw new NotFoundException(String.format("User not found with this username: %s", user.getUserName()));
         }
-        return user;
     }
 
-    //TODO: ha nem létezik a userName, => error message: "User is not exist"
     public void deleteUser(String userName) {
-        userRepository.deleteById(userName);
+        if (userIsExist(userName)) {
+            userRepository.deleteById(userName);
+        } else {
+            throw new NotFoundException(String.format("User not found with this username: %s", userName));
+        }
     }
-//    public ResponseEntity<String> deleteUser(String userName){
-//        boolean existUser = userRepository.existsById(userName);
-//
-//        if(existUser){
-//            userRepository.deleteById(userName);
-//            return ResponseEntity.ok("User deleted successfully.");
-//        } else {
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User name is not exist");
-//        }
-//    }
 
     public User listUserByUserName(String userName) {
         Optional<User> userOptional = userRepository.findById(userName);
-        return userOptional.orElse(null);
+        return userOptional.orElseThrow(() ->
+                new NotFoundException(String.format("User not found with this username: %s", userName))
+        );
     }
 
     public List<User> listAllUser() {

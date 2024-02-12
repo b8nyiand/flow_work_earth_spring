@@ -3,6 +3,7 @@ package hu.flowacademy.ads.controller;
 import hu.flowacademy.ads.model.Ad;
 import hu.flowacademy.ads.service.AdService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class AdController {
 
     @PostMapping
     @RequestMapping("/add/{userName}")
+    @ResponseStatus(HttpStatus.CREATED)
     public Ad createAdForUser(@PathVariable String userName,
                               @RequestBody Ad ad){
         return adService.createAdForUser(userName, ad);
@@ -30,6 +32,7 @@ public class AdController {
 
     @DeleteMapping
     @RequestMapping("/{id}/delete")
+    @ResponseStatus(HttpStatus.ACCEPTED)
     public void deleteAd(@PathVariable Long id){
         adService.deleteAd(id);
     }

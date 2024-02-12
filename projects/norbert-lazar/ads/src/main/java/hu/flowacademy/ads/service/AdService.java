@@ -1,5 +1,6 @@
 package hu.flowacademy.ads.service;
 
+import hu.flowacademy.ads.exceptionHandler.NotFoundException;
 import hu.flowacademy.ads.model.Ad;
 import hu.flowacademy.ads.model.User;
 import hu.flowacademy.ads.repository.AdRepository;
@@ -25,19 +26,20 @@ public class AdService {
         if (existUser.isPresent()) {
             User user = existUser.get();
             ad.setUser(user);
+            ad.setCreationDate(LocalDate.now());
+            return adRepository.save(ad);
+        } else {
+            throw new NotFoundException(String.format("User not found with this Username: %s", userName));
         }
-
-        return adRepository.save(ad);
     }
 
-    //TODO: ha nincs ilyen id modify-hoz?
     public Ad modifyAd(Long id, Ad ad) {
         Optional<Ad> optionalAd = adRepository.findById(id);
-        if(optionalAd.isPresent()){
+        if (optionalAd.isPresent()) {
 
             Ad existAd = optionalAd.get();
 
-            if(existAd.getCreationDate() == null){
+            if (existAd.getCreationDate() == null) {
                 existAd.setCreationDate(LocalDate.now());
             }
 
@@ -46,28 +48,31 @@ public class AdService {
             existAd.setDescription(ad.getDescription());
 
             return adRepository.save(existAd);
+        } else {
+            throw new NotFoundException(String.format("Not found Ad with this Id: %s", id));
+
         }
-
-        return ad;
     }
 
-    //TODO: ha nincs ilyen id delete-hez?
-    public void deleteAd(Long id){
+    public void deleteAd(Long id) {
         Optional<Ad> adOptional = adRepository.findById(id);
-
-        if(adOptional.isPresent()){
-            adRepository.deleteById(id);
-        }
-
+        adOptional.orElseThrow(() ->
+                new NotFoundException(String.format("Not found Ad with this Id: %s", id))
+        );
     }
 
-    public List<Ad> listAdsByUserName(String userName){
-        return adRepository.findByUserUserName(userName);
+    public List<Ad> listAdsByUserName(String userName) {
+        Optional<List<Ad>> existUserWithAd = Optional.ofNullable(adRepository.findByUserUserName(userName));
+        return existUserWithAd.orElseThrow(() ->
+                new NotFoundException(String.format("User not found with this username: %s", userName))
+        );
     }
 
-    public Ad listAdById(Long id){
+    public Ad listAdById(Long id) {
         Optional<Ad> adOptional = adRepository.findById(id);
-        return adOptional.orElse(null);
+        return adOptional.orElseThrow(() ->
+                new NotFoundException(String.format("Not found Ad with this Id: %s", id))
+        );
     }
 
 }

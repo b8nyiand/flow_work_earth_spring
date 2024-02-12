@@ -20,9 +20,15 @@ public class GlobalExceptionHandler {
 
     }
 
-    @ExceptionHandler(UserExistException.class)
-    public ResponseEntity<ErrorResponse> handleUserExistException(UserExistException ex) {
+    @ExceptionHandler(ForbiddenException.class)
+    public ResponseEntity<ErrorResponse> handleUserExistException(ForbiddenException ex) {
         ErrorResponse errorResponse = new ErrorResponse(HttpStatus.FORBIDDEN.value(), ex.getMessage());
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(errorResponse);
+    }
+
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleUserNotFoundException(NotFoundException ex) {
+        ErrorResponse errorResponse = new ErrorResponse(HttpStatus.NOT_FOUND.value(), ex.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
     }
 }
