@@ -20,7 +20,7 @@ public class Jobs {
 
 
     @ManyToOne
-    @JoinColumn(name = "user_id",nullable = false) // ezen keresztül kapcsolódik
+    @JoinColumn(name = "user_id",nullable = false)      // ezen keresztül kapcsolódik a tábla
     @JsonIgnore
     private User user;
 

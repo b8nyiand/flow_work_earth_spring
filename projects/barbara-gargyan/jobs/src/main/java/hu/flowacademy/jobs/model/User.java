@@ -10,15 +10,13 @@ import java.util.List;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
     private String userName;
+
     private String fullName;
     private LocalDate creationDate;
 
-    @OneToMany(mappedBy = "user")
-    private List<Jobs> jobsList;
+    @OneToMany(mappedBy = "user") // 1 felhasználóhoz több álláshirdetés
+    private List<Jobs> jobsList;  // 1 felhasználóhoz tartozó álláshirdetéseket tárolja
 
     public User() {
     }
@@ -27,16 +25,8 @@ public class User {
         this.userName = userName;
         this.fullName = fullName;
         this.creationDate = creationDate;
-    }
 
-    public Long getId() {
-        return id;
     }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getUserName() {
         return userName;
     }
@@ -63,5 +53,9 @@ public class User {
 
     public List<Jobs> getJobsList() {
         return jobsList;
+    }
+
+    public void setJobsList(List<Jobs> jobsList) {
+        this.jobsList = jobsList;
     }
 }

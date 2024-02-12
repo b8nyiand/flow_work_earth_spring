@@ -12,36 +12,29 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    // 1. user hozzáadása:
-
     public User addUser(User user) {
         return userRepository.save(user);
     }
 
-    // 2. user módosítása / update:
+    public void deleteUser(String userName) {
+        User userToDelete = userRepository.findByUserName(userName);
+        if (userToDelete != null) {
+            userRepository.delete(userToDelete);
+        } else {
+            throw new RuntimeException("A User nem található");
+        }
+    }
 
     public User updateUser(User user) {
         return userRepository.save(user);
     }
 
-    // 3. user törlése id alapján:
-
-    public void deleteUser(Long id) {
-        userRepository.deleteById(id);
+    public List<User> listUsersByUserName(String userName) {   //userName alapján listáz
+        return userRepository.findByFullName(userName);
     }
 
-    // 4. user lekérése teljes név alapján:
-
-    public List<User> getUsersByUserName(String userName) {
-        return userRepository.findByUserName(userName);
-    }
-
-
-    // 5. összes user listázása:
-
-    public List<User> allUserList(){
+    public List<User> listAllUsers() {                    // minden Usert kilistáz
         return userRepository.findAll();
     }
-
 
 }

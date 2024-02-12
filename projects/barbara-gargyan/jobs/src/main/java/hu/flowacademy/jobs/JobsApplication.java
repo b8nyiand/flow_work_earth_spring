@@ -27,12 +27,13 @@ public class JobsApplication {
         return args -> {
             if (userRepository.findAll().isEmpty()) {                   // ha nincs user elem az adatbázisban -> CSAK AKKOR hajtódjon végre! (1x fut le, feltölti adatokkal az adatázis)
 
-                User user= new User("kelly", "Molnár András",LocalDate.now());
+               User user= new User("kissA", "Kiss Antónia", LocalDate.now());
+                User user1= new User("molnar1", "Molnár András",LocalDate.now());
                 userRepository.save(user);
 
 
-                Jobs job = new Jobs("séf", 500_000, "konyhai munka", "kelly",LocalDate.now(), user);
-                Jobs job1 = new Jobs("nővér", 600_000, "korházi munka", "csibe", LocalDate.now(), user);
+                Jobs job = new Jobs("séf", 500_000, "konyhai munka", "molnar1",LocalDate.now(), user1);
+                Jobs job1 = new Jobs("nővér", 600_000, "korházi munka", "molnar1", LocalDate.now(), user);
 
                jobsRepository.save(job);
                jobsRepository.save(job1);
