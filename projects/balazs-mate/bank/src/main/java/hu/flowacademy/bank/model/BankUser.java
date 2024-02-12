@@ -24,9 +24,14 @@ public class BankUser {
     private String fullname;
     private LocalDate creationDate;
 
+    private String email;
+    private String password;
+    @Setter(AccessLevel.NONE)
+    private Boolean isAdmin;
+    private String address;
+
     @JsonIgnore
     @OnDelete(action = OnDeleteAction.CASCADE)
-//    @OnDelete(action = OnDeleteAction.SET_NULL)
     @OneToMany(mappedBy = "bankUser")
     private List<BankAccount> accounts;
 
@@ -35,11 +40,13 @@ public class BankUser {
         this.username = username;
         this.fullname = fullname;
         this.creationDate = creationDate;
+        this.isAdmin = false;
     }
 
     public BankUser(String username, String fullname) {
         this.username = username;
         this.fullname = fullname;
         this.creationDate = LocalDate.now();
+        this.isAdmin = false;
     }
 }
