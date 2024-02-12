@@ -1,5 +1,6 @@
 package hu.flowacademy.ads.service;
 
+import hu.flowacademy.ads.dto.UserResponseDTO;
 import hu.flowacademy.ads.exceptionHandler.ForbiddenException;
 import hu.flowacademy.ads.exceptionHandler.NotFoundException;
 import hu.flowacademy.ads.model.User;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -39,7 +41,7 @@ public class UserService {
             }
             return userRepository.save(user);
         } else {
-            throw new NotFoundException(String.format("User not found with this username: %s", user.getUserName()));
+            throw new NotFoundException(String.format("User not found with this Username: %s", user.getUserName()));
         }
     }
 
@@ -47,19 +49,32 @@ public class UserService {
         if (userIsExist(userName)) {
             userRepository.deleteById(userName);
         } else {
-            throw new NotFoundException(String.format("User not found with this username: %s", userName));
+            throw new NotFoundException(String.format("User not found with this Username: %s", userName));
         }
     }
 
-    public User listUserByUserName(String userName) {
+    public UserResponseDTO listUserByUserName(String userName) {
         Optional<User> userOptional = userRepository.findById(userName);
-        return userOptional.orElseThrow(() ->
-                new NotFoundException(String.format("User not found with this username: %s", userName))
+        return userOptional.map(user -> {
+            UserResponseDTO userResponseDTO = new UserResponseDTO();
+            userResponseDTO.setUserName(user.getUserName());
+            userResponseDTO.setFullName(user.getFullName());
+            userResponseDTO.setCreationDate(user.getCreationDate());
+            return userResponseDTO;
+        }).orElseThrow(() ->
+                new NotFoundException(String.format("User not found with this Username: %s", userName))
         );
     }
 
-    public List<User> listAllUser() {
-        return userRepository.findAll();
+    public List<UserResponseDTO> listAllUser() {
+        List<User> userList = userRepository.findAll();
+        return userList.stream().map(user -> {
+            UserResponseDTO userResponseDTO = new UserResponseDTO();
+            userResponseDTO.setUserName(user.getUserName());
+            userResponseDTO.setFullName(user.getFullName());
+            userResponseDTO.setCreationDate(user.getCreationDate());
+            return userResponseDTO;
+        }).collect(Collectors.toList());
     }
 
 }

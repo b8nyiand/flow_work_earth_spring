@@ -44,14 +44,7 @@ public class UserController {
     @GetMapping
     @RequestMapping("/list")
     public List<UserResponseDTO> listAllUser(){
-        List<User> userList = userService.listAllUser();
-        return userList.stream().map( user -> {
-            UserResponseDTO userResponseDTO = new UserResponseDTO();
-            userResponseDTO.setUserName(user.getUserName());
-            userResponseDTO.setFullName(user.getFullName());
-            userResponseDTO.setCreationDate(user.getCreationDate());
-            return userResponseDTO;
-        }).collect(Collectors.toList());
+        return userService.listAllUser();
     }
 
     /**
@@ -61,7 +54,7 @@ public class UserController {
      */
     @GetMapping
     @RequestMapping("/{userName}/list")
-    public User userByUserName(@PathVariable String userName){
+    public UserResponseDTO userByUserName(@PathVariable String userName){
         return userService.listUserByUserName(userName);
     }
 
