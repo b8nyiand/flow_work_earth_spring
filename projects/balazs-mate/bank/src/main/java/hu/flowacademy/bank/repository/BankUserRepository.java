@@ -18,4 +18,6 @@ public interface BankUserRepository extends JpaRepository<BankUser, String> {
     @Query("DELETE FROM BankUser u WHERE u.username= :userName")
     void deleteByUsername(@Param("userName") String username);
 
+
+
 }

@@ -1,5 +1,6 @@
 package hu.flowacademy.bank.service;
 
+import hu.flowacademy.bank.model.BankAccount;
 import hu.flowacademy.bank.model.BankUser;
 import hu.flowacademy.bank.repository.BankUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
