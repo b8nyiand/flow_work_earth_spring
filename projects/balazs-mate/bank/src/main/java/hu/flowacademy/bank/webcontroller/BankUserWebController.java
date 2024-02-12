@@ -19,15 +19,22 @@ public class BankUserWebController {
     @Autowired
     BankUserService bankUserService;
 
-//    //---------------------------------------------------------------------------//
-//
-//    @PostMapping("/add")
-//    @ResponseStatus(HttpStatus.CREATED)
-//    public BankUser save(@RequestBody BankUser bankUser) {
-//        return bankUserService.save(bankUser);
-//    }
-//
-//    //---------------------------------------------------------------------------//
+    //---------------------------------------------------------------------------//
+
+    @GetMapping("/add")
+    public String showForm(Model model) {
+        BankUser bankUser = new BankUser();
+        model.addAttribute("user", bankUser);
+        return "register_user";
+    }
+
+    @PostMapping("/add")
+    public String acceptForm(@ModelAttribute("user") BankUser bankUser) {
+//          bankUserService.save(bankUser);
+          return "user_info";
+    }
+
+    //---------------------------------------------------------------------------//
 
     @GetMapping("/findAll")
     public String findAll(Model model) {
