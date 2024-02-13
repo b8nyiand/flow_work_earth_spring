@@ -25,8 +25,6 @@ public class BankUser {
     private LocalDate creationDate;
 
     private String email;
- /*   @Getter(AccessLevel.NONE)
-    @Setter(AccessLevel.NONE)*/
     private String password;
     @Setter(AccessLevel.NONE)
     private Boolean isAdmin;
