@@ -23,12 +23,10 @@ public class UsersController {
     public Users updateUser(Users users) {
         return usersService.updateUser(users);
     }
-    // FIXME Delete user
     @DeleteMapping("/deleteuser/{username}")
     public void deleteUser(Users username) {
         usersService.deleteUser(username);
     }
-
     @GetMapping("/findByName/{fullname}")
     public List<Users> findByFullname(@PathVariable String fullname) {
         return usersService.findByFullname(fullname);

@@ -13,6 +13,7 @@ public class Users {
     private String username;
     private String fullname;
     private LocalDate creationDate;
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @OneToMany(orphanRemoval = true, cascade = CascadeType.REMOVE, mappedBy = "users")
     private List<Job> jobList;
 

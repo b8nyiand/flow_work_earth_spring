@@ -24,7 +24,6 @@ public class JobController {
     private List<Job> findBySalary() {
         return jobService.findBySalary();
     }
-
     @GetMapping("/500K")
     private List<Job> findByLessSalary() {
         return jobService.findByLessSalary();

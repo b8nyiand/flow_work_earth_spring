@@ -23,7 +23,6 @@ public class UsersService {
     public Users updateUser(Users users){
         return usersRepository.save(users);
     }
-    // FIXME Delete user
     public void deleteUser(Users username){
         usersRepository.delete(username);
     }
