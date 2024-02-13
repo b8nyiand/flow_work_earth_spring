@@ -72,11 +72,11 @@ public class BankAccount {
         this.creationDate = creationDate;
     }
 
-    public AccountOwner getUser() {
+    public AccountOwner getAccountOwner() {
         return accountOwner;
     }
 
-    public void setUser(AccountOwner accountOwner) {
+    public void setAccountOwner(AccountOwner accountOwner) {
         this.accountOwner = accountOwner;
     }
 
