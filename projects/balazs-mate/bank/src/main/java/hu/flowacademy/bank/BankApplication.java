@@ -46,7 +46,7 @@ public class BankApplication {
                 bankUserService.save(user02);
                 bankAccountService.save(account02);
 
-                BankUser user03 = new BankUser("pferernc", "Ferenc Papp", LocalDate.of(2019,9,2));
+                BankUser user03 = new BankUser("pferenc", "Ferenc Papp", LocalDate.of(2019,9,2));
                 BankAccount account03 = new BankAccount("010100550101", 230000, Currency.EUR, user03);
 
                 bankUserService.save(user03);

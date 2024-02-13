@@ -30,8 +30,8 @@ public class BankUserWebController {
 
     @PostMapping("/add")
     public String acceptForm(@ModelAttribute("user") BankUser bankUser) {
-//          bankUserService.save(bankUser);
-          return "user_info";
+        bankUserService.save(bankUser);
+        return "user_info";
     }
 
     //---------------------------------------------------------------------------//
