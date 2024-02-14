@@ -20,7 +20,7 @@ public class UsersController {
     }
     //FIXME Update user
     @PutMapping("/updateuser")
-    public Users updateUser(Users users) {
+    public Users updateUser(@RequestBody Users users) {
         return usersService.updateUser(users);
     }
     @DeleteMapping("/deleteuser/{username}")

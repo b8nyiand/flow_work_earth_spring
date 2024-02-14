@@ -17,8 +17,13 @@ public class JobService {
     private JobRepository jobRepository;
     @Autowired
     private UsersService usersService;
+
+    public void deleteJob(Job id) {
+        jobRepository.delete(id);
+    }
+
     //FIXME Add job
-    public Job addJobToUser(Job job){
+    public Job addJobToUser(Job job) {
         return jobRepository.save(job);
     }
 
@@ -29,12 +34,15 @@ public class JobService {
     public List<Job> findByLessSalary() {
         return jobRepository.findBySalaryLessThan(500000);
     }
-    public  List<Job> findByTitle(){
+
+    public List<Job> findByTitle() {
         return jobRepository.findByTitleLike("%Spring%");
     }
-    public List<Job> findByAnySalaryGreaterThan(int salary){
+
+    public List<Job> findByAnySalaryGreaterThan(int salary) {
         return jobRepository.findBySalaryGreaterThan(salary);
     }
+
     public Job findById(Long id) {
         Optional<Job> jobOptional = jobRepository.findById(id);
         if (jobOptional.isPresent()) {

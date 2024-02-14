@@ -14,6 +14,11 @@ public class JobController {
     @Autowired
     private JobService jobService;
 
+    @DeleteMapping("/deletejob/{id}")
+    private void deleteJob(Job id) {
+        jobService.deleteJob(id);
+    }
+
     //FIXME Add job
     @PostMapping("/addjob")
     private Job addJobToUser(@RequestBody Job job) {
@@ -24,18 +29,22 @@ public class JobController {
     private List<Job> findBySalary() {
         return jobService.findBySalary();
     }
+
     @GetMapping("/500K")
     private List<Job> findByLessSalary() {
         return jobService.findByLessSalary();
     }
+
     @GetMapping("/spring")
     private List<Job> findByTitle() {
         return jobService.findByTitle();
     }
+
     @GetMapping("/slarygreatherthen/{salary}")
     private List<Job> findByAnySalaryGreaterThan(@PathVariable int salary) {
         return jobService.findByAnySalaryGreaterThan(salary);
     }
+
     @GetMapping("/userjobs/{id}")
     private Job jobById(@PathVariable Long id) {
         return jobService.findById(id);
