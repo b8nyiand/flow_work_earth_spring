@@ -21,19 +21,14 @@ public class AdController {
         return adService.addAd(ad);
     }
 
-    @GetMapping("/findByName/{name}")
-    public List<Ad> findByUserName(@PathVariable String userName) {
-        return adService.findByUserName(userName);
-    }
-
     @GetMapping("/findById/{id}")
     public Ad findById(@PathVariable Long id) {
         return adService.findById(id);
     }
 
-    @PutMapping("/updateUser")
-    public Ad updateUser(@RequestBody Ad user) {
-        return adService.updateUser(user);
+    @PutMapping("/updateAd")
+    public Ad updateUser(@RequestBody Ad ad) {
+        return adService.updateAd(ad);
     }
 
     @DeleteMapping("/delete/{id}")

@@ -18,10 +18,6 @@ public class AdService {
         return adRepository.save(ad);
     }
 
-    public List<Ad> findByUserName(String userName) {
-        return adRepository.findByName(userName);
-    }
-
     public Ad findById(Long id) {
         Optional<Ad> optionalAd = adRepository.findById(id);
         if (optionalAd.isPresent()) {
@@ -29,8 +25,8 @@ public class AdService {
         }
         throw new RuntimeException("No user found.");
     }
-    public Ad updateUser(Ad user) {
-        return adRepository.save(user);
+    public Ad updateAd(Ad ad) {
+        return adRepository.save(ad);
     }
 
     public void deleteAd(Long id) {

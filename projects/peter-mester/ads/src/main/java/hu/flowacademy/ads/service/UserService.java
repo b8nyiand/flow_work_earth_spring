@@ -18,7 +18,7 @@ public class UserService {
     }
 
     public List<User> findByName(String fullName) {
-        return userRepository.findByName(fullName);
+        return userRepository.findByFullName(fullName);
     }
 
     public User updateUser(User user) {
