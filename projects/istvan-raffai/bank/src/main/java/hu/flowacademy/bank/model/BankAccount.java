@@ -18,7 +18,7 @@ public class BankAccount {
 
     @ManyToOne
     @JoinColumn(name = "userName", nullable = false)
-    @JsonIgnore
+//    @JsonIgnore
     private AccountOwner accountOwner;
 
     public BankAccount() {
