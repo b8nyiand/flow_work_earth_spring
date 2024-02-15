@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th=http://www.thymeleaf.org>
+
+<head>
+	<meta content="text/html" ; charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<title>Advertisement Registration</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+</head>
+
+<body>
+	<div class="container my-5">
+		<h3>Termék regisztrálás</h3>
+		<div class="card">
+			<div class="card-body">
+				<a href="/" class="btn btn-primary">
+					<i class="fas ml-2"> Main page </i></a>
+				<div class="col-md-10">
+					<form action="#" th:action="@{/ad_registration}" th:object = "${ad}" method="post">
+						<div class="row">
+							<div class="form-group col-md-8">
+								<label class="col-form-label">Product name</label>
+								<input 
+									type="text"
+									name="productName"
+									th:field="*{title}"
+									class="form-control"
+									placeholder="Termék név"
+								/>
+							</div>
+							<div class="form-group col-md-8">
+								<label class="col-form-label">Price</label>
+								<input 
+									type="text"
+									name="type"
+									th:field="*{price}"
+									class="form-control"
+									placeholder="Típus"
+								/>
+							</div>
+							<div class="form-group col-md-8">
+								<label class="col-form-label">Description</label>
+								<input 
+								type="text" 
+								name="price"
+								th:field="*{description}"
+								class="form-control"  
+								placeholder="Ár" />
+							</div>
+
+							<div class="col-md-6">
+								<button type="submit" class="btn btn-primary">Regisztrálás</button>
+							</div>
+
+							<input type="hidden" id="id">
+
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
