@@ -36,4 +36,16 @@ public class AdService {
     public List<Ad> findAllAds() {
         return adRepository.findAll();
     }
+    public List<Ad> findByPriceGreaterThan4000() {
+        return adRepository.findByPriceGreaterThan(4000);
+    }
+    public List<Ad> findByPriceLessThan3000() {
+        return adRepository.findByPriceLessThan(3000);
+    }
+    public List<Ad> findByTitleLikeBojler() {
+        return adRepository.findByTitleLike("%bojler%");
+    }
+    public List<Ad> findByPriceGreaterThan(Integer price) {
+        return adRepository.findByPriceGreaterThan(price);
+    }
 }

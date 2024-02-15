@@ -1,12 +1,12 @@
 package hu.flowacademy.ads.service;
 
+import hu.flowacademy.ads.model.Ad;
 import hu.flowacademy.ads.model.User;
 import hu.flowacademy.ads.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserService {
@@ -31,5 +31,8 @@ public class UserService {
 
     public List<User> findAllUsers() {
         return userRepository.findAll();
+    }
+    public List<User> findByFullNameLikeKovacs() {
+        return userRepository.findByFullNameLike("%Kovács%");
     }
 }
