@@ -84,7 +84,9 @@
 
                         <tr th:each="user : ${allUser}">
                             <td th:text="${user.fullname}"></td>
-                            <td th:text="${user.username}">belakiss</td>
+                            <td><a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
+                                    th:text="${user.username}"
+                                    th:href="@{'/web/bank/user/findByUsername/' + ${user.username}}">belakiss</a></td>
                             <td th:text="${user.creationDate}">2009.02.12</td>
                             <td th:text="${user.email}">kisbela@akarmi.com</td>
                             <td th:text="${user.address}">6725 Hungary, Szeged, Aranyos utca 119.</td>
