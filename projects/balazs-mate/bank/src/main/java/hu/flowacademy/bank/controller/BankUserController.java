@@ -1,5 +1,6 @@
 package hu.flowacademy.bank.controller;
 
+import hu.flowacademy.bank.model.BankAccount;
 import hu.flowacademy.bank.model.BankUser;
 import hu.flowacademy.bank.service.BankUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,11 @@ public class BankUserController {
     @GetMapping("/findByFullname/{fullname}")
     public List<BankUser> findByFullname(@PathVariable String fullname) {
         return bankUserService.findByFullname(fullname);
+    }
+
+    @GetMapping("/findByFUEA")
+    public List<BankUser> findByOptionalFUEA(@RequestParam(required = false, name = "fullname") String fullname, @RequestParam(required = false, name = "username") String username, @RequestParam(required = false, name = "email") String email, @RequestParam(required = false, name = "address") String address) {
+        return bankUserService.findByOptionalFUEA(fullname, username, email, address);
     }
 
 

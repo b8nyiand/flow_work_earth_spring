@@ -42,6 +42,18 @@ public class BankUserWebController {
         return "users";
     }
 
+    @GetMapping("/search")
+    public String findByOptionalFUA() {
+        return "user_search";
+    }
+
+    @PostMapping("/search")
+    public String acceptSearch(Model model, @RequestParam(required = false, name = "fullname") String fullname, @RequestParam(required = false, name = "username") String username, @RequestParam(required = false, name = "email") String email, @RequestParam(required = false, name = "address") String address) {
+        model.addAttribute("allUser", bankUserService.findByOptionalFUEA(fullname, username, email, address));
+        return "users";
+    }
+
+
 //
 //    @GetMapping("/findByUsername/{username}")
 //    public BankUser findByUsername(@PathVariable String username) {

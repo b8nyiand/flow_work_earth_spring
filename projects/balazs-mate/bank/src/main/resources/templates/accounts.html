@@ -84,8 +84,8 @@
                         <tr th:each="account : ${bankaccounts}">
                             <td th:text="${account.id}">13213</td>
                             <td th:text="${account.accountNumber}">80911100-11111111-34343434</td>
-                            <td>bmate</td>
-                            <td>Balázs Máté</td>
+                            <td th:text="${account.bankUser.username}">jabd</td>
+                            <td th:text="${account.bankUser.fullname}">John Anybody</td>
                             <td th:text="${account.currency}">HUF</td>
                             <td th:text="${account.balance}">100000</td>
                             <td th:text="${account.creationDate}">2006.11.23.</td>

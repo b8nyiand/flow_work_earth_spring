@@ -35,7 +35,6 @@ public class BankUser {
     @OneToMany(mappedBy = "bankUser")
     private List<BankAccount> accounts;
 
-
     public BankUser(String username, String fullname, LocalDate creationDate) {
         this.username = username;
         this.fullname = fullname;

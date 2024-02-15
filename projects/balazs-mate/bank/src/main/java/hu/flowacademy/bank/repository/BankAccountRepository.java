@@ -30,4 +30,20 @@ public interface BankAccountRepository extends JpaRepository<BankAccount, Long> 
     List<BankAccount> findByCurrencyAndBalanceRange(@Param("currency") Currency currency, @Param("lowerLimit") Integer lowerLimit, @Param("upperLimit") Integer upperLimit);
 
 
+    //Queries with multiple optional parameters
+/*
+ @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    private String accountNumber;
+    private Integer balance;
+    @Enumerated(EnumType.STRING)
+    private Currency currency;
+    private LocalDate creationDate;
+
+    @ManyToOne
+    @JoinColumn(name = "username")
+    private BankUser bankUser;
+ */
+
+
 }
