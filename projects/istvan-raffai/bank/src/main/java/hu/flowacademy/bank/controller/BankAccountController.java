@@ -1,9 +1,6 @@
 package hu.flowacademy.bank.controller;
 
-
-import hu.flowacademy.bank.model.AccountOwner;
 import hu.flowacademy.bank.model.BankAccount;
-import hu.flowacademy.bank.repository.BankAccountRepository;
 import hu.flowacademy.bank.service.BankAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

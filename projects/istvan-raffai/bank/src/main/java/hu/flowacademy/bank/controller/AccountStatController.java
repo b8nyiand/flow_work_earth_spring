@@ -39,5 +39,8 @@ public class AccountStatController {
     public List<BankAccount> biggerBalance(@PathVariable Integer balance, @PathVariable String currency){
         return accountStatService.biggerBalance(balance, currency);
     }
-
+    @GetMapping("/creationIsBefore_Days/{numberOfDays}")
+    public List<BankAccount> howOldIsTheAccount(@PathVariable Integer numberOfDays){
+        return accountStatService.howOldIsTheAccount(numberOfDays);
+    }
 }

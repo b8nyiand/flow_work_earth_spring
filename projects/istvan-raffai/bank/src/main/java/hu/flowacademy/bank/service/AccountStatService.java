@@ -6,6 +6,8 @@ import hu.flowacademy.bank.repository.BankAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -50,6 +52,12 @@ public class AccountStatService {
         return bankAccountRepository.findAll()
                 .stream()
                 .filter(x->x.getBalance()>balance && x.getCurrency().equals(currency))
+                .collect(Collectors.toList());
+    }
+    public List<BankAccount> howOldIsTheAccount(Integer numberOfDays){
+        return bankAccountRepository.findAll()
+                .stream()
+                .filter(x->x.getCreationDate().isBefore(LocalDate.now().minus(numberOfDays, ChronoUnit.DAYS)))
                 .collect(Collectors.toList());
     }
 
