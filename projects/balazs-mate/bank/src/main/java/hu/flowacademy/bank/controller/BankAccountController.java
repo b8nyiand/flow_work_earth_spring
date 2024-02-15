@@ -44,6 +44,11 @@ public class BankAccountController {
         return bankAccountService.findById(id);
     }
 
+    @GetMapping("/findByAccountnumber/{accountNumber}")
+    public BankAccount findByAccountNumber(@PathVariable String accountNumber) {
+        return bankAccountService.findByAccountNumber(accountNumber);
+    }
+
     //---------------------------------------------------------------------------//
 
     @PutMapping("/update")

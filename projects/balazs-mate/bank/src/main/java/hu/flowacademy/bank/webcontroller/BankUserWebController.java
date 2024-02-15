@@ -36,12 +36,6 @@ public class BankUserWebController {
 
     //---------------------------------------------------------------------------//
 
-    @GetMapping("/findAll")
-    public String findAll(Model model) {
-        model.addAttribute("allUser", bankUserService.findAll());
-        return "users";
-    }
-
     @GetMapping("/search")
     public String findByOptionalFUA() {
         return "users";
@@ -53,13 +47,19 @@ public class BankUserWebController {
         return "users";
     }
 
+    @GetMapping("/findAll")
+    public String findAll(Model model) {
+        model.addAttribute("allUser", bankUserService.findAll());
+        return "users";
+    }
 
-    //
-//    @GetMapping("/findByUsername/{username}")
-//    public BankUser findByUsername(@PathVariable String username) {
-//        return bankUserService.findByUsername(username);
-//    }
-//
+    @GetMapping("/findByUsername/{username}")
+    public String findByUsername(Model model, @PathVariable String username) {
+        model.addAttribute("user", bankUserService.findByUsername(username));
+        return "user_info";
+    }
+
+
 //    @GetMapping("/findByFullname/{fullname}")
 //    public List<BankUser> findByFullname(@PathVariable String fullname) {
 //        return bankUserService.findByFullname(fullname);

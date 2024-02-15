@@ -87,8 +87,15 @@
 
                         <tr th:each="account : ${bankaccounts}">
                             <td th:text="${account.id}">13213</td>
-                            <td th:text="${account.accountNumber}">80911100-11111111-34343434</td>
-                            <td th:text="${account.bankUser.username}">jabd</td>
+                            <td><a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
+                                    th:href="@{'/web/bank/account/findByAccountnumber/' + ${account.accountNumber}}"
+                                    th:text="${account.accountNumber}">80911100-11111111-34343434</a></td>
+                            <td><a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
+                                    th:href="@{'/web/bank/user/findByUsername/' + ${account.bankUser.username}}"
+                                    th:text="${account.bankUser.username}">
+                                    johnsmith01
+                                </a></td>
+
                             <td th:text="${account.bankUser.fullname}">John Anybody</td>
                             <td th:text="${account.currency}">HUF</td>
                             <td th:text="${account.balance}">100000</td>
@@ -105,50 +112,50 @@
         <!--starts: offcanvas section!-->
 
         <div class="offcanvas offcanvas-bottom h-auto" tabindex="-1" id="offcanvasBottom"
-        aria-labelledby="offcanvasBottomLabel">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasBottomLabel">Search bankaccounts</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
+            aria-labelledby="offcanvasBottomLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasBottomLabel">Search bankaccounts</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
 
 
-            <form class="row px-1 mx-1 mt-1 align-items-center justify-content-center"
-                action="/web/bank/account/search" method="post">
-                <div class="col-6 col-md-3">
-                    <label for="limit1" class="form-label">Balance minumum</label>
-                    <input type="text" class="form-control" id="limit1" name="limit1">
-                </div>
-                <div class="col-6 col-md-3">
-                    <label for="limit2" class="form-label">Balance maximum</label>
-                    <input type="text" class="form-control" id="limit2" name="limit2">
-                </div>
-                <div class="col-md-4">
-                    <label for="currency" class="form-label">Currency</label>
-                    <input type="text" class="form-control" id="currency" name="currency">
-                </div>
-                <div class="col-6 col-md-5">
-                    <label for="creationStartDate" class="form-label">Account created after</label>
-                    <input type="text" class="form-control" id="creationStartDate" name="creationStartDate">
-                </div>
-                <div class="col-6 col-md-5">
-                    <label for="creationEndDate" class="form-label">Account created before</label>
-                    <input type="text" class="form-control" id="creationEndDate" name="creationEndDate">
-                </div>
-                <div class="row px-1 mx-1 mt-4 align-items-center justify-content-center">
-                    <div class="col-4 col-md-3">
-                        <button type=" submit" class="btn btn-info">Search</button>
+                <form class="row px-1 mx-1 mt-1 align-items-center justify-content-center"
+                    action="/web/bank/account/search" method="post">
+                    <div class="col-6 col-md-3">
+                        <label for="limit1" class="form-label">Balance minumum</label>
+                        <input type="text" class="form-control" id="limit1" name="limit1">
                     </div>
-                    <div class="col-4 col-md-3">
-                        <button type="reset" class="btn btn-danger">Reset</button>
+                    <div class="col-6 col-md-3">
+                        <label for="limit2" class="form-label">Balance maximum</label>
+                        <input type="text" class="form-control" id="limit2" name="limit2">
                     </div>
-                </div>
-            </form>
+                    <div class="col-md-4">
+                        <label for="currency" class="form-label">Currency</label>
+                        <input type="text" class="form-control" id="currency" name="currency">
+                    </div>
+                    <div class="col-6 col-md-5">
+                        <label for="creationStartDate" class="form-label">Account created after</label>
+                        <input type="text" class="form-control" id="creationStartDate" name="creationStartDate">
+                    </div>
+                    <div class="col-6 col-md-5">
+                        <label for="creationEndDate" class="form-label">Account created before</label>
+                        <input type="text" class="form-control" id="creationEndDate" name="creationEndDate">
+                    </div>
+                    <div class="row px-1 mx-1 mt-4 align-items-center justify-content-center">
+                        <div class="col-4 col-md-3">
+                            <button type=" submit" class="btn btn-info">Search</button>
+                        </div>
+                        <div class="col-4 col-md-3">
+                            <button type="reset" class="btn btn-danger">Reset</button>
+                        </div>
+                    </div>
+                </form>
 
+            </div>
         </div>
-    </div>
 
-    <!--ends: offcanvas section!-->
+        <!--ends: offcanvas section!-->
 
     </div>
 

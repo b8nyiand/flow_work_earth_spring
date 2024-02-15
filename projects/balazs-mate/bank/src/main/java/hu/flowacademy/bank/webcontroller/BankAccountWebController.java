@@ -35,6 +35,12 @@ public class BankAccountWebController {
         return "accounts";
     }
 
+    @GetMapping("/findByAccountnumber/{accountNumber}")
+    public String findByAccountNumber(Model model, @PathVariable String accountNumber) {
+        model.addAttribute("account", bankAccountService.findByAccountNumber(accountNumber));
+        return "account_info";
+    }
+
     @GetMapping("/search")
     public String findByOptionalFUA() {
         return "accounts";

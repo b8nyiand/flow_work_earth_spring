@@ -20,6 +20,8 @@ public interface BankAccountRepository extends JpaRepository<BankAccount, Long> 
     //---------------------------------------------------------------------------//
 
 
+    BankAccount findByAccountNumber(String accountNumber);
+
     List<BankAccount> findByCurrency(Currency currency);
 
     @Query("Select a from BankAccount a where currency=:currency and balance>= :lowerLimit")
@@ -44,5 +46,5 @@ public interface BankAccountRepository extends JpaRepository<BankAccount, Long> 
                                                @Param("startDate") LocalDate startDate,
                                                @Param("endDate") LocalDate endDate);
 
- 
+
 }

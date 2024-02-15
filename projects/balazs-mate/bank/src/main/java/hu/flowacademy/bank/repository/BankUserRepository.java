@@ -15,6 +15,9 @@ import java.util.List;
 
 public interface BankUserRepository extends JpaRepository<BankUser, String> {
 
+
+
+
     BankUser findByUsername(String username);
 
     List<BankUser> findByFullname(String fullname);

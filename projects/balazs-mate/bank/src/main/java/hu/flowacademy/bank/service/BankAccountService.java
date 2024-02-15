@@ -43,6 +43,10 @@ public class BankAccountService {
         return bankAccountRepository.findById(id).orElseThrow();
     }
 
+    public BankAccount findByAccountNumber(String accountNumber) {
+        return bankAccountRepository.findByAccountNumber(accountNumber);
+    }
+
     //Stat controller's methods
 
     public List<BankAccount> findByCurrency(String currencyStr) {

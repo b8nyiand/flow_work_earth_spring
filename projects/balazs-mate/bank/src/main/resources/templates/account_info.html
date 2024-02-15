@@ -1,0 +1,115 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bankaccount info - <th:block th:utext="${account.accountNumber}">13124-23234-231231313</th:block>
+    </title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+    <!-- starts: general without login -->
+
+    <nav class="navbar navbar-expand-sm bg-primary">
+        <div class="container-md">
+            <a class="navbar-brand" href="/">
+                <img src="https://uxwing.com/wp-content/themes/uxwing/download/banking-finance/hungarian-forint-distribute-money-icon.svg"
+                    alt="Logo" width="40" height="30" class="d-inline-block align-text-top">ftBank</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                            href="https://github.com/b8nyiand/flow_work_earth_spring/tree/balazs-mate/projects/balazs-mate#readme">About</a>
+                    </li>
+
+                    <!-- starts: navbar elements available after login -->
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/web/bank/account/findAll">Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/web/bank/account/findAll">Bankaccounts</a>
+                    </li>
+
+                    <!-- ends: navbar elements available after login -->
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-md">
+        <div class="row p-1 mx-1 mt-1 justify-content-center">
+            <div class="col-md-10 rounded text-center  text-danger shadow fw-bold">
+                <p class="fs-6">Warning! This is a course project
+                    and created for educational purpose, all the data are generated randomly.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ends: general without login -->
+
+    <div class="container-md">
+        <div class="row p-1 mx-1 mt-1 justify-content-center">
+            <div class="col-10 h3 mb-3" th:text=${account.accountNumber}>0000000-1111111111-333333333</div>
+        </div>
+        <div class="row p-1 mx-1 mt-1 justify-content-center">
+            <div class="col-10">
+                <table class="table table-hover table-sm">
+                    <tr>
+                        <td>Currency</td>
+                        <td class="fs-4" th:text="${account.currency}">HUF</td>
+                    </tr>
+                    <tr>
+                        <td>Balance</td>
+                        <td class="fs-4" th:text="${account.balance}">787.000</td>
+                    </tr>
+                    <tr>
+                        <td>Username</td>
+                        <td th:text="${account.bankUser.username}">belus1980</td>
+                    </tr>
+                    <tr>
+                        <td>Name</td>
+                        <td th:text="${account.bankUser.fullname}">Béla Kovács</td>
+                    </tr>
+                    <tr>
+                        <td>Bankaccount created</td>
+                        <td th:text="${account.creationDate}">2007.05.07.</td>
+                    </tr>
+                    <tr>
+                        <td>Useraccount created</td>
+                        <td th:text="${account.bankUser.creationDate}">2008.05.07.</td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td th:text="${account.bankUser.email}">belus@belus.com</td>
+                    </tr>
+                    <tr>
+                        <td>Address</td>
+                        <td th:text="${account.bankUser.address}">H-7005 Hungary, Taktaharkány, Part utca 435.</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- <td>Accounts</td>  -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
