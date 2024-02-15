@@ -1,5 +1,7 @@
 ### exclude frontend files
 /src/main/resources/static
+/src/main/resources/tmp
+
 .gitignore
 
 HELP.md

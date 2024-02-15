@@ -14,6 +14,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
 @Entity
 public class BankUser {
@@ -35,17 +36,21 @@ public class BankUser {
     @OneToMany(mappedBy = "bankUser")
     private List<BankAccount> accounts;
 
+    public BankUser(String username, String fullname, LocalDate creationDate, Boolean isAdmin) {
+        this.username = username;
+        this.fullname = fullname;
+        this.creationDate = creationDate;
+        this.isAdmin = isAdmin;
+    }
+
     public BankUser(String username, String fullname, LocalDate creationDate) {
         this.username = username;
         this.fullname = fullname;
         this.creationDate = creationDate;
-        this.isAdmin = false;
     }
 
     public BankUser(String username, String fullname) {
         this.username = username;
         this.fullname = fullname;
-        this.creationDate = LocalDate.now();
-        this.isAdmin = false;
     }
 }

@@ -25,7 +25,6 @@ public interface BankUserRepository extends JpaRepository<BankUser, String> {
 
 
     //Queries with multiple optional parameters
-
     @Query("SELECT u FROM BankUser u WHERE " +
             "((:fullname IS NULL OR :fullname = '' ) OR u.fullname = :fullname) AND " +
             "((:username IS NULL OR :username = '' ) OR u.username = :username) AND " +

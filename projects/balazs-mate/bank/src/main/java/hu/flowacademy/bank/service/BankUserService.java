@@ -6,7 +6,11 @@ import hu.flowacademy.bank.model.Currency;
 import hu.flowacademy.bank.repository.BankUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -49,6 +53,10 @@ public class BankUserService {
         return bankUserRepository.findByOptionalFUEA(fullname, username, email, address);
     }
 
+    //---------------------------------------------------------------------------//
+    public BankUser update(BankUser bankUser) {
+        return bankUserRepository.save(bankUser);
+    }
 
     //---------------------------------------------------------------------------//
 

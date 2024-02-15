@@ -1,17 +1,13 @@
 package hu.flowacademy.bank.service;
 
 import hu.flowacademy.bank.model.BankAccount;
-import hu.flowacademy.bank.model.BankUser;
 import hu.flowacademy.bank.model.Currency;
 import hu.flowacademy.bank.repository.BankAccountRepository;
-import hu.flowacademy.bank.repository.BankUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class BankAccountService {
@@ -22,6 +18,9 @@ public class BankAccountService {
     //---------------------------------------------------------------------------//
 
     public BankAccount save(BankAccount bankAccount) {
+        if (bankAccount.getCreationDate() == null) {
+            bankAccount.setCreationDate(LocalDate.now());
+        }
         return bankAccountRepository.save(bankAccount);
     }
 
@@ -46,7 +45,6 @@ public class BankAccountService {
 
     //Stat controller's methods
 
-    //IllegalArgumentException - handle in case of tipos!!!
     public List<BankAccount> findByCurrency(String currencyStr) {
         Currency currency = Currency.valueOf(currencyStr.toUpperCase());
         return bankAccountRepository.findByCurrency(currency);
@@ -67,6 +65,39 @@ public class BankAccountService {
         return bankAccountRepository.findByCurrencyAndBalanceRange(currency, lowerLimit, upperLimit);
     }
 
+    public List<BankAccount> findByMultipleConditions(Integer limit1,
+                                                      Integer limit2,
+                                                      String currencyStr,
+                                                      String startDateStr,
+                                                      String endDateStr) {
+
+        //Testing
+        System.out.println(LocalDate.now());
+        System.out.println(limit1 + " " + limit2 + " " + currencyStr + " " + startDateStr + " " + endDateStr);
+        Integer lowerLimit, upperLimit;
+
+        if (limit1 != null && limit2 != null) {
+            lowerLimit = Math.min(limit1, limit2);
+            upperLimit = Math.max(limit1, limit2);
+        } else if (limit1 == limit2) {
+            lowerLimit = 0;
+            upperLimit = 0;
+        } else {
+            lowerLimit = limit1;
+            upperLimit = limit2;
+        }
+
+        Currency currency = (currencyStr == null || currencyStr.equals("")) ? null : Currency.valueOf(currencyStr.toUpperCase());
+        LocalDate startDate = (startDateStr == null || startDateStr.equals("")) ? null : LocalDate.parse(startDateStr);
+        LocalDate endDate = (endDateStr == null || endDateStr.equals("")) ? null : LocalDate.parse(endDateStr);
+
+        //Testing
+        System.out.println(startDate);
+        System.out.println(endDate);
+
+
+        return bankAccountRepository.findByMultipleConditions(lowerLimit, upperLimit, currency, startDate, endDate);
+    }
 
     //---------------------------------------------------------------------------//
 

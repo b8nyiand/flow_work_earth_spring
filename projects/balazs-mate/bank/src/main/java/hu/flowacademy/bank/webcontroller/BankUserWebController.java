@@ -44,7 +44,7 @@ public class BankUserWebController {
 
     @GetMapping("/search")
     public String findByOptionalFUA() {
-        return "user_search";
+        return "users";
     }
 
     @PostMapping("/search")
@@ -54,7 +54,7 @@ public class BankUserWebController {
     }
 
 
-//
+    //
 //    @GetMapping("/findByUsername/{username}")
 //    public BankUser findByUsername(@PathVariable String username) {
 //        return bankUserService.findByUsername(username);
