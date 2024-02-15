@@ -1,5 +1,6 @@
 package hu.flowacademy.bank.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -14,11 +15,21 @@ public class BankAccount {
     private String currency;
     @ManyToOne
     @JoinColumn(name = "username", nullable = false)
-    private User user;
+    @JsonIgnore
+    private Customer customer;
     @Column(nullable = false)
     private LocalDate creationDate;
 
-    public BankAccount(String number, int i, String huf, User user1, LocalDate now) {
+
+    public BankAccount() {
+    }
+
+    public BankAccount(String accountNumber, Integer balance, String currency, Customer customer,LocalDate creationDate) {
+        this.accountNumber = accountNumber;
+        this.balance = balance;
+        this.currency = currency;
+        this.customer = customer;
+        this.creationDate = creationDate;
     }
 
     @PrePersist
@@ -58,19 +69,19 @@ public class BankAccount {
         this.currency = currency;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     public LocalDate getCreationDate() {
         return creationDate;
     }
 
     public void setCreationDate(LocalDate creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }
