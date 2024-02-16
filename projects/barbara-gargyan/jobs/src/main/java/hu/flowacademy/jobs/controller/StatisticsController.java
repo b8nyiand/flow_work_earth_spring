@@ -1,10 +1,12 @@
 package hu.flowacademy.jobs.controller;
 
 import hu.flowacademy.jobs.model.Jobs;
+import hu.flowacademy.jobs.model.User;
 import hu.flowacademy.jobs.repository.JobsRepository;
 import hu.flowacademy.jobs.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,5 +30,24 @@ public class StatisticsController {
     public List<Jobs> getJobsWithLowSalary() {
         return jobsRepository.findBySalaryLessThan(500000);
     }
+
+    @GetMapping("/listUsersByFullName/{fullName}")
+    public List<User> listUsersByFullName(@PathVariable String fullName) {
+        return userRepository.findByFullNameContaining(fullName);
+    }
+
+    @GetMapping("findJobByTitle/{title}")
+    public List<Jobs>listJobByTitle(@PathVariable String title){
+        return jobsRepository.findJobByTitle(title);
+    }
+    @GetMapping("findJobBySalary/{salary}")
+    public List<Jobs>listJobBySalary(@PathVariable Integer salary){
+        return jobsRepository.findJobBySalary(salary);
+    }
+
+
+
+
+
 
 }

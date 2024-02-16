@@ -45,6 +45,14 @@ public class JobsService {
     {
         return jobsRepository.findById(id).orElse(null);
     }
+
+    public List<Jobs> getJobByTitle(String title){                  // 6. Job lekérdezése title alapján
+        return jobsRepository.findJobByTitle(title);
+    }
+
+    public List<Jobs> getJobBySalary(Integer salary){
+        return jobsRepository.findJobBySalary(salary);
+    }
 }
 
 
