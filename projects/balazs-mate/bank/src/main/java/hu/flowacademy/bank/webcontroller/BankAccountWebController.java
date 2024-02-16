@@ -1,15 +1,14 @@
 package hu.flowacademy.bank.webcontroller;
 
 import hu.flowacademy.bank.model.BankAccount;
+import hu.flowacademy.bank.model.BankUser;
 import hu.flowacademy.bank.model.Currency;
 import hu.flowacademy.bank.service.BankAccountService;
+import hu.flowacademy.bank.service.BankUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDate;
-import java.util.List;
 
 @Controller
 @RequestMapping("/web/bank/account/")
@@ -19,26 +18,42 @@ public class BankAccountWebController {
 
     @Autowired
     BankAccountService bankAccountService;
+    @Autowired
+    BankUserService bankUserService;
 
-    //    //---------------------------------------------------------------------------//
-//
-//    @PostMapping("/add")
-//    public BankAccount save(@RequestBody BankAccount bankAccount) {
-//        return bankAccountService.save(bankAccount);
-//    }
-//
-//    //---------------------------------------------------------------------------//
-//
-    @GetMapping("/findAll")
-    public String findAll(Model model) {
-        model.addAttribute("bankaccounts", bankAccountService.findAll());
-        return "accounts";
+
+    @GetMapping("/new/{username}")
+    public String showForm(Model model, @PathVariable String username) {
+        model.addAttribute("currencies", Currency.values());
+        model.addAttribute("username", username);
+        return "register_account";
+    }
+
+    @PostMapping("/new")
+    public String save(@RequestParam(required = true, name = "username") String username,
+                       @RequestParam(required = true, name = "currencyStr") String currencyStr,
+                       @RequestParam(required = false, name = "balance") Integer balance,
+                       Model model) {
+
+        balance = balance == null ? 0 : balance;
+        BankUser bankUser = bankUserService.findByUsername(username);
+        BankAccount bankAccount = new BankAccount("dfsf", balance, Currency.valueOf(currencyStr), bankUser);
+        bankAccountService.save(bankAccount);
+
+        model.addAttribute("account", bankAccount);
+        return "account_info";
     }
 
     @GetMapping("/findByAccountnumber/{accountNumber}")
     public String findByAccountNumber(Model model, @PathVariable String accountNumber) {
         model.addAttribute("account", bankAccountService.findByAccountNumber(accountNumber));
         return "account_info";
+    }
+
+    @GetMapping("/findAll")
+    public String findAll(Model model) {
+        model.addAttribute("bankaccounts", bankAccountService.findAll());
+        return "accounts";
     }
 
     @GetMapping("/search")

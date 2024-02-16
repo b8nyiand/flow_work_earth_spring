@@ -1,6 +1,7 @@
 package hu.flowacademy.bank.webcontroller;
 
 import hu.flowacademy.bank.model.BankUser;
+import hu.flowacademy.bank.model.Currency;
 import hu.flowacademy.bank.service.BankUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,11 +19,13 @@ public class BankUserWebController {
 
     @Autowired
     BankUserService bankUserService;
+    @Autowired
+    MessageController messageController;
 
     //---------------------------------------------------------------------------//
 
     @GetMapping("/add")
-    public String showForm(Model model) {
+    public String getForm(Model model) {
         BankUser bankUser = new BankUser();
         model.addAttribute("user", bankUser);
         return "register_user";
@@ -56,16 +59,10 @@ public class BankUserWebController {
     @GetMapping("/findByUsername/{username}")
     public String findByUsername(Model model, @PathVariable String username) {
         model.addAttribute("user", bankUserService.findByUsername(username));
+        model.addAttribute("currencies", Currency.values());
         return "user_info";
     }
 
-
-//    @GetMapping("/findByFullname/{fullname}")
-//    public List<BankUser> findByFullname(@PathVariable String fullname) {
-//        return bankUserService.findByFullname(fullname);
-//    }
-//
-//
 //    //---------------------------------------------------------------------------//
 //
 //    @PutMapping("/update")
@@ -74,16 +71,24 @@ public class BankUserWebController {
 //        return bankUserService.save(bankUser);
 //    }
 //
-//    //---------------------------------------------------------------------------//
-//
-//    @Transactional
-//    @DeleteMapping("/deleteByUsername/{username}")
-//    public void deleteByUsername(@PathVariable String username) {
-//        bankUserService.deleteByUsername(username);
-//    }
-//
-//    //---------------------------------------------------------------------------//
-//
+    //---------------------------------------------------------------------------//
 
+    @Transactional
+    @GetMapping("/deleteByUsername/{username}")
+    public String deleteByUsername(@PathVariable String username) {
+
+        //create a boolean: isSuccessful, and this will the input of the printMessage method
+        bankUserService.deleteByUsername(username);
+        return "redirect:/web/bank/message/action";
+    }
+
+    @Transactional
+    @PostMapping("/deleteByUsername")
+    public String deleteByUsernameGeneral(@RequestParam(name = "username") String username) {
+
+        //create a boolean: isSuccessful, and this will the input of the printMessage method
+        bankUserService.deleteByUsername(username);
+        return messageController.printMessage();
+    }
 
 }

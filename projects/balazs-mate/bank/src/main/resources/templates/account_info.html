@@ -14,7 +14,7 @@
 <body>
 
     <!-- starts: general without login -->
-
+    <!-- info/no search/ -->
     <nav class="navbar navbar-expand-sm bg-primary">
         <div class="container-md">
             <a class="navbar-brand" href="/">
@@ -35,14 +35,21 @@
                     </li>
 
                     <!-- starts: navbar elements available after login -->
-
                     <li class="nav-item">
                         <a class="nav-link" href="/web/bank/account/findAll">Users</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/web/bank/account/findAll">Bankaccounts</a>
                     </li>
-
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Options
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Delete bankaccount</a></li>
+                        </ul>
+                    </li>
                     <!-- ends: navbar elements available after login -->
 
                 </ul>
@@ -58,7 +65,6 @@
             </div>
         </div>
     </div>
-
     <!-- ends: general without login -->
 
     <div class="container-md">
@@ -104,8 +110,6 @@
             </div>
         </div>
     </div>
-
-    <!-- <td>Accounts</td>  -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"

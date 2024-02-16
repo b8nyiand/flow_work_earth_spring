@@ -14,7 +14,6 @@
 <body>
 
     <!-- starts: general without login -->
-
     <nav class="navbar navbar-expand-sm bg-primary">
         <div class="container-md">
             <a class="navbar-brand" href="/">
@@ -35,7 +34,6 @@
                     </li>
 
                     <!-- starts: navbar elements available after login -->
-
                     <li class="nav-item">
                         <a class="nav-link" href="/web/bank/user/findAll">Users</a>
                     </li>
@@ -46,7 +44,6 @@
                         <a class="nav-link" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom"
                             aria-controls="offcanvasBottom">Search</a>
                     </li>
-
                     <!-- ends: navbar elements available after login -->
 
                 </ul>
@@ -62,7 +59,6 @@
             </div>
         </div>
     </div>
-
     <!-- ends: general without login -->
 
     <div class="container-md">
@@ -84,7 +80,6 @@
                     <tbody class="table-group-divider">
 
                         <!--starts: repeated section!-->
-
                         <tr th:each="account : ${bankaccounts}">
                             <td th:text="${account.id}">13213</td>
                             <td><a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
@@ -101,7 +96,6 @@
                             <td th:text="${account.balance}">100000</td>
                             <td th:text="${account.creationDate}">2006.11.23.</td>
                         </tr>
-
                         <!--ends: repeated section!-->
 
                     </tbody>
@@ -110,7 +104,6 @@
         </div>
 
         <!--starts: offcanvas section!-->
-
         <div class="offcanvas offcanvas-bottom h-auto" tabindex="-1" id="offcanvasBottom"
             aria-labelledby="offcanvasBottomLabel">
             <div class="offcanvas-header">
@@ -154,7 +147,6 @@
 
             </div>
         </div>
-
         <!--ends: offcanvas section!-->
 
     </div>
