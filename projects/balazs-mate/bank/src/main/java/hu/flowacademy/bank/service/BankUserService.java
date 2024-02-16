@@ -60,11 +60,9 @@ public class BankUserService {
 
     //---------------------------------------------------------------------------//
 
-
     public void deleteByUsername(String username) {
         bankUserRepository.deleteByUsername(username);
     }
-
 
     //---------------------------------------------------------------------------//
 

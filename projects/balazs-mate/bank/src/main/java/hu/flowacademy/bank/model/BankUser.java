@@ -24,7 +24,6 @@ public class BankUser {
     private String username;
     private String fullname;
     private LocalDate creationDate;
-
     private String email;
     private String password;
     @Setter(AccessLevel.NONE)

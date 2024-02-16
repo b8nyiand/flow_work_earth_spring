@@ -37,9 +37,8 @@ public class BankAccountWebController {
 
         balance = balance == null ? 0 : balance;
         BankUser bankUser = bankUserService.findByUsername(username);
-        BankAccount bankAccount = new BankAccount("dfsf", balance, Currency.valueOf(currencyStr), bankUser);
+        BankAccount bankAccount = new BankAccount(balance, Currency.valueOf(currencyStr), bankUser);
         bankAccountService.save(bankAccount);
-
         model.addAttribute("account", bankAccount);
         return "account_info";
     }
@@ -72,41 +71,6 @@ public class BankAccountWebController {
         model.addAttribute("bankaccounts", bankAccountService.findByMultipleConditions(limit1, limit2, currencyStr, startDateStr, endDateStr));
         return "accounts";
     }
-
-
-//
-//    @GetMapping("/findByUsername/{username}")
-//    public List<BankAccount> findByBankUserUsername(@PathVariable String username) {
-//        return bankAccountService.findByBankUserUsername(username);
-//    }
-//
-//    @GetMapping("/findByFullname/{fullname}")
-//    public List<BankAccount> findByBankUserFullname(@PathVariable String fullname) {
-//        return bankAccountService.findByBankUserFullname(fullname);
-//    }
-//
-//    @GetMapping("/findById/{id}")
-//    public BankAccount findById(@PathVariable Long id) {
-//        return bankAccountService.findById(id);
-//    }
-//
-//    //---------------------------------------------------------------------------//
-//
-//    @PutMapping("/update")
-//    public BankAccount update(@RequestBody BankAccount bankAccount) {
-//        return bankAccountService.save(bankAccount);
-//    }
-//
-//    //---------------------------------------------------------------------------//
-//
-//    @DeleteMapping("/deleteById/{id}")
-//    public void deleteById(@PathVariable Long id) {
-//        bankAccountService.deleteById(id);
-//    }
-//
-//
-//    //---------------------------------------------------------------------------//
-
 
 }
 

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Getter
 @Setter
@@ -26,25 +27,30 @@ public class BankAccount {
     private BankUser bankUser;
 
 
-    public BankAccount(String accountNumber, Integer balance, Currency currency, LocalDate creationDate, hu.flowacademy.bank.model.BankUser bankUser) {
-        this.accountNumber = accountNumber;
+    public BankAccount(Integer balance, Currency currency, LocalDate creationDate, hu.flowacademy.bank.model.BankUser bankUser) {
         this.balance = balance;
         this.currency = currency;
         this.creationDate = creationDate;
         this.bankUser = bankUser;
     }
 
-    public BankAccount(String accountNumber, Integer balance, Currency currency, hu.flowacademy.bank.model.BankUser bankUser) {
-        this.accountNumber = accountNumber;
+    public BankAccount(Integer balance, Currency currency, hu.flowacademy.bank.model.BankUser bankUser) {
         this.balance = balance;
         this.currency = currency;
         this.bankUser = bankUser;
     }
 
-    public BankAccount(String accountNumber, Integer balance, Currency currency) {
-        this.accountNumber = accountNumber;
+    public BankAccount(Integer balance, Currency currency) {
         this.balance = balance;
         this.currency = currency;
     }
 
+    public void setRandomAccountNumber() {
+        int lowerLimit = 0;
+        int upperlimit = 1000000;
+        int tag1 = ThreadLocalRandom.current().nextInt(lowerLimit, upperlimit);
+        int tag2 = ThreadLocalRandom.current().nextInt(lowerLimit, upperlimit);
+        StringBuffer sb = new StringBuffer();
+        this.accountNumber = sb.append("BA").append("-").append(tag1).append("-").append(tag2).toString();
+    }
 }

@@ -21,6 +21,9 @@ public class BankAccountService {
         if (bankAccount.getCreationDate() == null) {
             bankAccount.setCreationDate(LocalDate.now());
         }
+        if (bankAccount.getAccountNumber() == null) {
+            bankAccount.setRandomAccountNumber();
+        }
         return bankAccountRepository.save(bankAccount);
     }
 
@@ -102,8 +105,6 @@ public class BankAccountService {
 
         return bankAccountRepository.findByMultipleConditions(lowerLimit, upperLimit, currency, startDate, endDate);
     }
-
-    //---------------------------------------------------------------------------//
 
     //---------------------------------------------------------------------------//
 
