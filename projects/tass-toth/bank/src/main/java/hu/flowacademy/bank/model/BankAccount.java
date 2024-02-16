@@ -14,11 +14,11 @@ public class BankAccount {
     private String accountNumber;
     private Integer balance;
     private String currency;
-    @Column(name = "customer_username")
     private String username;
     private LocalDate creationDate;
+
     @ManyToOne
-    @JoinColumn(name = "username", nullable = false)
+    @JoinColumn(name = "customer_username", nullable = false)
     @JsonIgnore
     private Customer customer;
 
@@ -27,12 +27,13 @@ public class BankAccount {
     public BankAccount() {
     }
 
-    public BankAccount(String accountNumber, Integer balance, String currency, Customer customer,LocalDate creationDate) {
+    public BankAccount(String accountNumber, Integer balance, String currency, Customer customer,LocalDate creationDate,String username) {
         this.accountNumber = accountNumber;
         this.balance = balance;
         this.currency = currency;
         this.customer = customer;
         this.creationDate = creationDate;
+        this.username = username;
     }
 
     @PrePersist
