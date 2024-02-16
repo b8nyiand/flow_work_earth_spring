@@ -3,6 +3,7 @@ package hu.flowacademy.jobs.service;
 import hu.flowacademy.jobs.modell.Job;
 import hu.flowacademy.jobs.modell.Users;
 import hu.flowacademy.jobs.repository.JobRepository;
+import hu.flowacademy.jobs.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,15 +17,21 @@ public class JobService {
     @Autowired
     private JobRepository jobRepository;
     @Autowired
-    private UsersService usersService;
+    private UsersRepository usersRepository;
 
     public void deleteJob(Job id) {
         jobRepository.delete(id);
     }
 
-    //FIXME Add job
-    public Job addJobToUser(Job job) {
-        return jobRepository.save(job);
+    public Job addJobToUser(String username, Job job) {
+        List<Users> users = usersRepository.findByUsername(username);
+        if (!users.isEmpty()) {
+            Users users1 = users.get(0);
+            job.setUsers(users1);
+            return jobRepository.save(job);
+        } else {
+            throw new RuntimeException("Ilyen felhasználó nincs: " + username);
+        }
     }
 
     public List<Job> findBySalary() {
@@ -49,6 +56,9 @@ public class JobService {
             return jobOptional.get();
         }
         throw new RuntimeException("No user found");
+    }
+    public Job updateJob(Job job){
+        return jobRepository.save(job);
     }
 
 }

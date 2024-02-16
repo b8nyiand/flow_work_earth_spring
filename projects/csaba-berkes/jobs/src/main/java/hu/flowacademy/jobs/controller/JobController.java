@@ -19,10 +19,9 @@ public class JobController {
         jobService.deleteJob(id);
     }
 
-    //FIXME Add job
-    @PostMapping("/addjob")
-    private Job addJobToUser(@RequestBody Job job) {
-        return jobService.addJobToUser(job);
+    @PostMapping("/addjob/{username}")
+    private Job addJobToUser(@PathVariable String username, @RequestBody Job job) {
+        return jobService.addJobToUser(username, job);
     }
 
     @GetMapping("/1M")
@@ -48,5 +47,9 @@ public class JobController {
     @GetMapping("/userjobs/{id}")
     private Job jobById(@PathVariable Long id) {
         return jobService.findById(id);
+    }
+    @PutMapping("/updatejob")
+    public Job updateJob(Job job){
+        return jobService.updateJob(job);
     }
 }

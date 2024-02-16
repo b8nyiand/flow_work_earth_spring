@@ -17,7 +17,7 @@ public class Job {
     private String description;
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "username", nullable = true)
+    @JoinColumn(name = "username", nullable = false)
     @JsonIgnore
     private Users users;
     private LocalDate creationDate;
@@ -32,7 +32,6 @@ public class Job {
         this.users = users;
         this.creationDate = creationDate;
     }
-
     public Long getId() {
         return id;
     }

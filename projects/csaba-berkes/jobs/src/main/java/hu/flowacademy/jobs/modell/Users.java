@@ -14,7 +14,7 @@ public class Users {
     private String fullname;
     private LocalDate creationDate;
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @OneToMany(orphanRemoval = true, cascade = CascadeType.REMOVE, mappedBy = "users")
+    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "users")
     private List<Job> jobList;
 
     public Users() {
