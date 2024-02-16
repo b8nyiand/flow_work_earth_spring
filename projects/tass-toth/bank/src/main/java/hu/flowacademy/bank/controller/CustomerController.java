@@ -17,15 +17,15 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
-    // Get all customers
-    @GetMapping("/ListAll")
-    public List<Customer> getAllCustomers() {
-        return customerService.getAllCustomers();
+
+    @GetMapping("/listAll")
+    public List<Customer> ListAllCustomers() {
+        return customerService.listAllCustomers();
     }
 
     // Get customer by username
     @GetMapping("/listByUsername/{username}")
-    public List<Customer> customerListbyUsername(@PathVariable String username){
+    public Customer customerListbyUsername(@PathVariable String username){
         return customerService.getCustomerByUsername(username);
     }
 
@@ -38,6 +38,7 @@ public class CustomerController {
 
     // Update existing customer
     @PutMapping("/update")
+    @ResponseStatus(HttpStatus.OK)
     public Customer updateCustomer(@RequestBody Customer customer) {
         return customerService.updateCustomer(customer);
 

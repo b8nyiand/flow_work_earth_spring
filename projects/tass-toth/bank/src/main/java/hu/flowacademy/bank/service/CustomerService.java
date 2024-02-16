@@ -18,11 +18,12 @@ public class CustomerService {
         return customerRepository.save(customer);
     }
 
-    public List<Customer> getAllCustomers() {
+
+    public List<Customer> listAllCustomers() {
         return customerRepository.findAll();
     }
 
-    public List<Customer> getCustomerByUsername(String username) {
+    public Customer getCustomerByUsername(String username) {
         return customerRepository.findByUsername(username);
     }
 

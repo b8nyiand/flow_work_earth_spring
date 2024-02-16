@@ -14,11 +14,11 @@ public class BankAccount {
     private String accountNumber;
     private Integer balance;
     private String currency;
-    @Column(name = "customer_username")
     private String username;
     private LocalDate creationDate;
+
     @ManyToOne
-    @JoinColumn(name = "username", nullable = false)
+    @JoinColumn(name = "customer_username", nullable = false)
     @JsonIgnore
     private Customer customer;
 

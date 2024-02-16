@@ -11,40 +11,35 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/bankaccounts")
+@RequestMapping("/bank")
 public class BankAccountController {
 
     @Autowired
     private BankAccountService bankAccountService;
 
-    // Get all bank account
-    @GetMapping("/listAllBankAccounts")
-    public List<BankAccount> getAllBankAccounts() {
-        return bankAccountService.listAllBankAccounts();
+    @PostMapping("/create/{userName}/account")
+    public BankAccount createBankAccountForUser(@PathVariable String username, @RequestBody BankAccount bankAccount) {
+        return bankAccountService.createBankAccount(username, bankAccount);
     }
 
-    // Get bank account by id
-    @GetMapping("/{id}")
-    public BankAccount getBankAccountById(@PathVariable Long id) {
-        return bankAccountService.findByAccountId(id);
-    }
-
-    // Create new bank account
-    @PostMapping("/create/{username}")
-    public BankAccount createBankAccount(@PathVariable String username ,@RequestBody BankAccount bankAccount) {
-        return bankAccountService.createBankAccount(username,bankAccount);
-    }
-
-    // Update existing bank account
-    @PutMapping("/update/{id}")
-    public BankAccount updateBankAccount (@RequestBody BankAccount bankAccount) {
+    @PutMapping("/update/account")
+    public BankAccount updateBankAccount(@RequestBody BankAccount bankAccount) {
         return bankAccountService.updateBankAccount(bankAccount);
     }
 
-
-    // Delete bank account
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/delete/account/{id}")
     public void deleteBankAccount(@PathVariable Long id) {
         bankAccountService.deleteBankAccount(id);
-        }
     }
+
+    @GetMapping("/user/{userName}/accounts")
+    public List<BankAccount> getBankAccountsByUserName(@PathVariable String userName) {
+        return bankAccountService.getBankAccountsByUserName(userName);
+    }
+
+    @GetMapping("/account/{id}")
+    public BankAccount getBankAccountById(@PathVariable Long id) {
+        return bankAccountService.getBankAccountById(id);
+    }
+}
+}

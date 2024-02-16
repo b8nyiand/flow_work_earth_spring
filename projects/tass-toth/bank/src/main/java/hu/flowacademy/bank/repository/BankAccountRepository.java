@@ -6,9 +6,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface BankAccountRepository extends JpaRepository<BankAccount, Long> {
-    List<BankAccount> findByBalanceGreaterThanAndCurrency(int i, String eur);
+    List<BankAccount> findByUserName(String userName);
+
+    List<BankAccount> findByCurrency(String currency);
 
     List<BankAccount> findByBalanceGreaterThan(Integer balance);
 
-    List<BankAccount> findByCurrency(String currency);
+    List<BankAccount> findByBalanceLessThanAndCurrency(Integer balance, String currency);
+
+    List<BankAccount> findByBalanceGreaterThanAndCurrency(Integer balance, String currency);
 }

@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class BankAccountService {
@@ -29,25 +29,43 @@ public class BankAccountService {
             bankAccount.setCustomer(customer);
             return bankAccountRepository.save(bankAccount);
         } else {
-            throw new RuntimeException("Hiba");
+            throw new RuntimeException("Hiba! A user nem található: " + username);
 
         }
     }
 
 
-    public BankAccount updateBankAccount(BankAccount updatedBankAccount) {
-        return bankAccountRepository.save(updatedBankAccount);
+    public BankAccount updateBankAccount(BankAccount bankAccount) {
+        return bankAccountRepository.save(bankAccount);
     }
 
-    public void deleteBankAccount(Long id){
+    public void deleteBankAccount(Long id) {
         bankAccountRepository.deleteById(id);
     }
 
-    public BankAccount findByAccountId(Long id){
+    public List<BankAccount> getBankAccountsByUserName(String userName) {
+        return bankAccountRepository.findByUserName(userName);
+    }
+
+    public BankAccount getBankAccountById(Long id) {
         return bankAccountRepository.findById(id).orElse(null);
     }
 
-    public List<BankAccount> listAllBankAccounts(){
-        return bankAccountRepository.findAll();
+    public List<BankAccount> getBankAccountsBalanceGreaterThanAmountAndCurrency(Integer amount, String currency) {
+        return bankAccountRepository.findByBalanceGreaterThanAndCurrency(amount, currency);
     }
+
+    public List<BankAccount> getBankAccountsBalanceLessThanAmountAndCurrency(Integer amount, String currency) {
+        return bankAccountRepository.findByBalanceLessThanAndCurrency(amount, currency);
+    }
+
+    public List<BankAccount> getBankAccountsByCurrency(String currency) {
+        return bankAccountRepository.findByCurrency(currency);
+    }
+
+    public List<BankAccount> getBankAccountsBalanceGreaterThanAmount(Integer amount) {
+        return bankAccountRepository.findByBalanceGreaterThan(amount);
+    }
+
+
 }

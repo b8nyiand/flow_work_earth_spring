@@ -8,5 +8,5 @@ import java.util.List;
 public interface CustomerRepository extends JpaRepository<Customer, String> {
 
 
-    public List<Customer> findByUsername(String username);
+    public Customer findByUsername(String username);
 }
