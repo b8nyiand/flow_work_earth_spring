@@ -17,14 +17,15 @@ public class JobsService {
 
     @Autowired
     private UserRepository userRepository;
-    // 1. Job létrehozása meglévő Userhez
-    public Jobs createJob(String userName, Jobs jobs) {             // meglévő username-hez Job létrehozása
-        User user = userRepository.findByUserName(userName);        // megkeresem a usrname-et
-        if (user != null) {                                         // ha talál
-            jobs.setUser(user);                                     // beállítja a job-ot a user-hez
-            return jobsRepository.save(jobs);                       // menti, majd visszaadja
+                                                                            // 1. Job létrehozása meglévő Userhez
+    public Jobs createJob(String userName, Jobs jobs) {
+        List<User> users = userRepository.findByUserName(userName);
+        if (!users.isEmpty()) {
+            User user = users.get(0);
+            jobs.setUser(user);
+            return jobsRepository.save(jobs);
         } else {
-            throw new RuntimeException("A felhasználó nem található: " + userName); // ha nincs ilyen username -> RuntimeException + message
+            throw new RuntimeException("A felhasználó nem található: " + userName);
         }
     }
 
@@ -40,7 +41,8 @@ public class JobsService {
         return jobsRepository.findByUserName(userName);
     }
 
-    public Jobs getJobById(Long id) {                               // 5. id alapján job lekérdezése
+    public Jobs getJobById(Long id)                                 // 5. id alapján job lekérdezése
+    {
         return jobsRepository.findById(id).orElse(null);
     }
 }

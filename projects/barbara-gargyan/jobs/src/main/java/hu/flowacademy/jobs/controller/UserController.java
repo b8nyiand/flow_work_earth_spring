@@ -14,18 +14,18 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/add")
+    @PostMapping("/addUser")
     @ResponseStatus(HttpStatus.CREATED)
     public User addUser(@RequestBody User user) {
         return userService.addUser(user);
     }
 
-    @DeleteMapping("/delete/{userName}")
+    @DeleteMapping("/deleteUser/{userName}")
     public void deleteUser(@PathVariable String userName) {
         userService.deleteUser(userName);
     }
 
-    @PutMapping("/update")
+    @PutMapping("/updateUser")
     @ResponseStatus(HttpStatus.OK)
     public User updateUser(@RequestBody User user) {
         return userService.updateUser(user);
@@ -36,7 +36,7 @@ public class UserController {
         return userService.listUsersByUserName(userName);
     }
 
-    @GetMapping("/list")
+    @GetMapping("/listAllUsers")
     public List<User> listAllUsers() {
         return userService.listAllUsers();
     }

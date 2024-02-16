@@ -12,15 +12,15 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public User addUser(User user) {
+    public User addUser(User user) {                                                   // 1. User hozzáadása
         return userRepository.save(user);
     }
 
-    public void deleteUser(String userName) {
-        User userToDelete = userRepository.findByUserName(userName);
-        if (userToDelete != null) {
-            userRepository.delete(userToDelete);
-        } else {
+    public void deleteUser(String userName) {                                       // 2. User törlése username alapján
+        List <User> userToDelete = userRepository.findByUserName(userName);                // megvizsgálom, hogy ven e iyen username
+        if (!userToDelete.isEmpty()) {                                                 // ha van -> töröljük
+            userRepository.deleteAll(userToDelete);
+        } else {                                                                    // más esetben(nem talál username alapján Usert -> exception-t dob)
             throw new RuntimeException("A User nem található");
         }
     }
@@ -30,7 +30,7 @@ public class UserService {
     }
 
     public List<User> listUsersByUserName(String userName) {   //userName alapján listáz
-        return userRepository.findByFullName(userName);
+        return userRepository.findByUserName(userName);
     }
 
     public List<User> listAllUsers() {                    // minden Usert kilistáz

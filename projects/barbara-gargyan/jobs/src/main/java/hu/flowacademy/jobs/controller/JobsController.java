@@ -16,7 +16,7 @@ public class JobsController {
     @Autowired
     private JobsService jobsService;
 
-    @PostMapping("/create/{userName}")                             // 1. Job létrehozása meglévő Userhez
+    @PostMapping("/createJob/{userName}")                             // 1. Job létrehozása meglévő Userhez
     @ResponseStatus(HttpStatus.CREATED)
     public Jobs createJob(@PathVariable String userName, @RequestBody Jobs job) {
         return jobsService.createJob(userName, job);
@@ -32,7 +32,7 @@ public class JobsController {
         jobsService.deleteJob(id);
     }
 
-    @GetMapping("/user/{userName}")                                 // 4. userName alapján jobs-ok listázása
+    @GetMapping("/getJobsByUserName/{userName}")                                 // 4. userName alapján jobs-ok listázása
     public List<Jobs> getJobsByUserName(@PathVariable String userName) {
         return jobsService.getJobsByUserName(userName);
     }
