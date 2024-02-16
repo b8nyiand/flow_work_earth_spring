@@ -27,8 +27,14 @@ public class AdController {
     }
 
     @PutMapping("/updateAd")
-    public Ad updateUser(@RequestBody Ad ad) {
+    public Ad updateAd(@RequestBody Ad ad) {
         return adService.updateAd(ad);
+    }
+
+    @GetMapping
+    @RequestMapping("/findAdByUserName/{userName}")
+    public List<Ad> findAdByUserName(@PathVariable String userName){
+        return adService.findAdByUserName(userName);
     }
 
     @DeleteMapping("/delete/{id}")

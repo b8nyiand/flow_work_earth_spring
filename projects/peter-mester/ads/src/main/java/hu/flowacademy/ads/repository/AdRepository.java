@@ -9,4 +9,5 @@ public interface AdRepository extends JpaRepository<Ad, Long> {
     List<Ad> findByPriceGreaterThan(Integer price);
     List<Ad> findByPriceLessThan(Integer price);
     List<Ad> findByTitleLike(String title);
+    List<Ad> findByUserUserName(String userName);
 }

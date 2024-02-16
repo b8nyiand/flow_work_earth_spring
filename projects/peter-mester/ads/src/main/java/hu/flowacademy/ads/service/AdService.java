@@ -32,6 +32,9 @@ public class AdService {
     public void deleteAd(Long id) {
         adRepository.deleteById(id);
     }
+    public List<Ad> findAdByUserName(String userName){
+        return adRepository.findByUserUserName(userName);
+    }
 
     public List<Ad> findAllAds() {
         return adRepository.findAll();

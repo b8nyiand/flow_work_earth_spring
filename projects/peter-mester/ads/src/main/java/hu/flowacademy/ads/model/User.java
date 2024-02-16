@@ -16,7 +16,7 @@ public class User {
     private String fullName;
     private LocalDate creationDate;
 
-    @OneToMany(orphanRemoval = true, cascade = CascadeType.REMOVE, mappedBy = "user")
+    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "user")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Ad> ads;
 
