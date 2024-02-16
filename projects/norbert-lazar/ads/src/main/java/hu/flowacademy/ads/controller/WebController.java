@@ -22,7 +22,7 @@ public class WebController {
     @GetMapping("/")
     public String index(Model model){
         model.addAttribute("users", userService.listAllUser());
-        return "mainPage";
+        return "users";
     }
 
     @GetMapping("/user_registration")
@@ -51,4 +51,13 @@ public class WebController {
         adService.createAdForUser(userName, ad);
         return "redirect:/";
     }
+
+    // TODO: hogy lehet a userName-et rejtve küldeni???
+    @GetMapping("/advertisements")
+    public String listAdvertisement(Model model) {
+        String userName = "miki";
+        model.addAttribute("adList", adService.listAdsByUserName(userName));
+        return "user_ad_list";
+    }
+
 }
