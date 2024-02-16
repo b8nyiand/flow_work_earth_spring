@@ -10,15 +10,18 @@ public class BankAccount {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     private String accountNumber;
     private Integer balance;
     private String currency;
+    @Column(name = "customer_username")
+    private String username;
+    private LocalDate creationDate;
     @ManyToOne
     @JoinColumn(name = "username", nullable = false)
     @JsonIgnore
     private Customer customer;
-    @Column(nullable = false)
-    private LocalDate creationDate;
+
 
 
     public BankAccount() {
@@ -47,6 +50,14 @@ public class BankAccount {
 
     public String getAccountNumber() {
         return accountNumber;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void setAccountNumber(String accountNumber) {

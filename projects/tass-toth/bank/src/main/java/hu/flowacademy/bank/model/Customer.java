@@ -8,14 +8,14 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
+@Table(name = "customer")
 public class Customer {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private String username;
     private String fullname;
     private LocalDate creationDate;
 
-    @OneToMany(mappedBy = "Customer")
+    @OneToMany(mappedBy = "customer")
     private List<BankAccount> bankAccountList;
 
     @PrePersist
@@ -27,8 +27,7 @@ public class Customer {
     }
 
 
-
-    public Customer(String username, String fullname,LocalDate creationDate) {
+    public Customer(String username, String fullname, LocalDate creationDate) {
         this.username = username;
         this.fullname = fullname;
         this.creationDate = creationDate;
@@ -75,7 +74,4 @@ public class Customer {
                 '}';
     }
 
-    public Customer orElseThrow(Object o) {
-        return null;
-    }
 }
