@@ -30,6 +30,11 @@ public class BankUser {
     private Boolean isAdmin;
     private String address;
 
+    @Transient
+    private String country;
+    @Transient
+    private String city;
+
     @JsonIgnore
     @OnDelete(action = OnDeleteAction.CASCADE)
     @OneToMany(mappedBy = "bankUser")
@@ -51,5 +56,14 @@ public class BankUser {
     public BankUser(String username, String fullname) {
         this.username = username;
         this.fullname = fullname;
+    }
+
+    public void setAddress(String address) {
+        if (address == null || address.isEmpty()) {
+            this.address = this.country + ", " + this.city;
+        } else {
+            this.address = address;
+        }
+
     }
 }

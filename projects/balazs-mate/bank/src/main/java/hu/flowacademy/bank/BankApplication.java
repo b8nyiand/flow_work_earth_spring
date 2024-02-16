@@ -1,5 +1,10 @@
 package hu.flowacademy.bank;
 
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import hu.flowacademy.bank.function.Initializer;
 import hu.flowacademy.bank.model.BankAccount;
 import hu.flowacademy.bank.model.BankUser;
 import hu.flowacademy.bank.model.Currency;
@@ -11,7 +16,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.util.List;
 
 @SpringBootApplication
 public class BankApplication {
@@ -30,6 +41,8 @@ public class BankApplication {
         return args -> {
 
             if (bankUserService.findAll().isEmpty()) {
+                System.out.println("The repositories are empty.");
+                System.out.println("Upload initial data");
 
                 BankUser user01 = new BankUser("bmate", "Balázs Máté", LocalDate.of(2012, 4, 22), true);
                 BankAccount account01a = new BankAccount(500000, Currency.HUF, LocalDate.of(2011, 12, 20), user01);
@@ -50,10 +63,12 @@ public class BankApplication {
 
                 bankUserService.save(user03);
                 bankAccountService.save(account03);
-                ;
+
+                Initializer.populateRepositories().stream().forEach(bankUser -> bankUserService.save(bankUser));
 
                 System.out.println("Successfully finished with CommandLineRunner.");
                 System.out.println("Ready to work");
+
             }
         };
     }
