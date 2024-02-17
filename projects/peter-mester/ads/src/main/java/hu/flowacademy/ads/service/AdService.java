@@ -18,8 +18,15 @@ public class AdService {
     @Autowired
     private UserRepository userRepository;
 
-    public Ad addAd(Ad ad) {
-        return adRepository.save(ad);
+    public Ad addAd(String userName, Ad ad) {
+        List<User> userList = userRepository.findByUserName(userName);
+        if (!userList.isEmpty()) {
+            User users1 = userList.get(0);
+            ad.setUser(users1);
+            return adRepository.save(ad);
+        } else {
+            throw new RuntimeException("No user found.");
+        }
     }
 
     public Ad findById(Long id) {
@@ -28,9 +35,6 @@ public class AdService {
             return optionalAd.get();
         }
         throw new RuntimeException("No user found.");
-    }
-    public Ad updateAd(Ad ad) {
-        return adRepository.save(ad);
     }
 
     public Ad updateAd(String userName, Ad ad) {

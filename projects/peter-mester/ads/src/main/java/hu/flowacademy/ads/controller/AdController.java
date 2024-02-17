@@ -16,8 +16,9 @@ public class AdController {
     AdService adService;
 
     @PostMapping("/addAd/{userName}")
-    private Ad updateAd(@PathVariable String userName, @RequestBody Ad ad) {
-        return adService.updateAd(userName, ad);
+    @ResponseStatus(HttpStatus.CREATED)
+    private Ad addAd(@PathVariable String userName, @RequestBody Ad ad) {
+        return adService.addAd(userName, ad);
     }
 
     @GetMapping("/findById/{id}")
@@ -25,9 +26,9 @@ public class AdController {
         return adService.findById(id);
     }
 
-    @PutMapping("/updateAd")
-    public Ad updateAd(@RequestBody Ad ad) {
-        return adService.updateAd(ad);
+    @PutMapping("/updateAd/{userName}")
+    private Ad updateAd(@PathVariable String userName, @RequestBody Ad ad) {
+        return adService.updateAd(userName, ad);
     }
 
     @GetMapping
