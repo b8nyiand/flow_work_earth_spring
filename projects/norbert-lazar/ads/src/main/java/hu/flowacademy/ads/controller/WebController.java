@@ -28,12 +28,16 @@ public class WebController {
         return "index";
     }
 
+    //---------------USER----------------//
+
+    //LIST----//
     @GetMapping("/users")
     public String users(Model model){
         model.addAttribute("users", userService.listAllUser());
         return "users";
     }
 
+    //REGISTRATION-----//
     @GetMapping("/user_registration")
     public String addCustomer(Model model) {
         User user = new User();
@@ -47,6 +51,30 @@ public class WebController {
         return "redirect:/users";
     }
 
+    //EDIT-----//
+    @GetMapping("/user_modify")
+    public String modifyUser(Model model){
+        User user = new User();
+        model.addAttribute("user", user);
+        return "userModify_form";
+    }
+
+    @PostMapping("/user_modify")
+    public String modifyUser(@ModelAttribute("user") User user) {
+        userService.modifyUser(user);
+        return "redirect:/users";
+    }
+
+    //DELETE----//
+    @PostMapping("/user_delete")
+    public String deleteUser(@ModelAttribute("userName") String userName) {
+        userService.deleteUser(userName);
+        return "redirect:/users";
+    }
+
+    //---------------ADS----------------//
+
+    //SAVE----//
     @GetMapping("/ad_registration/{userName}")
     public String addAdvertisement(Model model,
                                    @PathVariable("userName") String userName) {
@@ -60,9 +88,10 @@ public class WebController {
     public String saveAdvertisement(@ModelAttribute("ad") Ad ad,
                                     @ModelAttribute("userName") String userName) {
         adService.createAdForUser(userName, ad);
-        return "redirect:/";
+        return "redirect:/users";
     }
 
+    //LIST BY USERNAME-----//
     @GetMapping("/advertisements/{userName}")
     public String listAdvertisement(@PathVariable String userName,
                                     Model model) {
@@ -71,10 +100,34 @@ public class WebController {
 
     }
 
+    //LIST ALL ADS-----//
     @GetMapping("/advertisements_all")
     public String adsResponseDTOList(Model model){
         model.addAttribute("adList", adService.adList());
         return "advertisements_all";
     }
 
+    //EDIT----//
+    @GetMapping("/ad_modify/{id}")
+    public String editAdvertisement(Model model,
+                                   @PathVariable("id") Long id) {
+        Ad ad = new Ad();
+        model.addAttribute("ad", ad);
+        model.addAttribute("id", id);
+        return "adModify_form";
+    }
+
+    @PostMapping("/ad_modify")
+    public String editAdvertisement(@ModelAttribute("ad") Ad ad,
+                                    @ModelAttribute("id") Long id) {
+        adService.modifyAd(id, ad);
+        return "redirect:/advertisements";
+    }
+
+    //DELETE----//
+    @PostMapping("/ad_delete")
+    public String deleteAd(@ModelAttribute("id") Long id) {
+        adService.deleteAd(id);
+        return "redirect:/advertisement";
+    }
 }

@@ -13,11 +13,11 @@
 
 <body>
 	<div class="container my-5">
-		<h3>Product registration</h3>
+		<h3>Add Advertisement</h3>
 		<div class="card">
 			<div class="card-body">
 				<a href="/users" class="btn btn-primary">
-					<i class="fas ml-2"></i>Users</a>
+					<i class="fas fa-angle-double-left ml-2"></i>Back</a>
 				<div class="col-md-10">
 					<form action="#" th:action="@{/ad_registration}" th:object="${ad}" method="post">
 						<input type="hidden" name="userName" th:value="${userName}"/>

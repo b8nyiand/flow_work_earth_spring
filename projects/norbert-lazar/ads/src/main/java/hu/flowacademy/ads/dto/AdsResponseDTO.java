@@ -8,6 +8,7 @@ import java.time.LocalDate;
 @Data
 public class AdsResponseDTO {
 
+    private Long id;
     private String title;
     private Integer price;
     private String description;

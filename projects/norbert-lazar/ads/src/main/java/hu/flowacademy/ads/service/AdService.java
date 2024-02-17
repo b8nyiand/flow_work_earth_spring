@@ -61,6 +61,7 @@ public class AdService {
         adOptional.orElseThrow(() ->
                 new NotFoundException(String.format("Not found Ad with this Id: %s", id))
         );
+        adRepository.deleteById(id);
     }
 
     public List<Ad> listAdsByUserName(String userName) {
@@ -82,6 +83,7 @@ public class AdService {
 
         return adList.stream().map(ad -> {
             AdsResponseDTO adsResponseDTO = new AdsResponseDTO();
+            adsResponseDTO.setId(ad.getId());
             adsResponseDTO.setTitle(ad.getTitle());
             adsResponseDTO.setPrice(ad.getPrice());
             adsResponseDTO.setDescription(ad.getDescription());
