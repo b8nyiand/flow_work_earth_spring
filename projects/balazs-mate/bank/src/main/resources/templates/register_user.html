@@ -75,7 +75,8 @@
             th:action="@{/web/bank/user/add}" method="post" th:object="${user}">
             <div class="col-md-5">
                 <label for="username" class="form-label">Username</label>
-                <input type="text" class="form-control" id="username" th:field="*{username}">
+                <input type="text" class="form-control" id="username" th:field="*{username}"
+                    placeholder="starts with letter, just lowercase letters, '-', '_', or number">
             </div>
             <div class="col-md-5">
                 <label for="fullname" class="form-label">Fullname</label>

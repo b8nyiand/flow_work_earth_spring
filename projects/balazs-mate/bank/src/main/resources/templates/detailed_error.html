@@ -1,0 +1,130 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        body {
+            padding: 0px;
+            margin: 0px;
+        }
+
+        section {
+            padding: 60px 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- starts: general without login -->
+    <!-- index/no search/ -->
+    <nav class="navbar navbar-expand-sm bg-primary">
+        <div class="container-md">
+            <a class="navbar-brand" href="/">
+                <img src="https://uxwing.com/wp-content/themes/uxwing/download/banking-finance/hungarian-forint-distribute-money-icon.svg"
+                    alt="Logo" width="40" height="30" class="d-inline-block align-text-top">ftBank</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                            href="https://github.com/b8nyiand/flow_work_earth_spring/tree/balazs-mate/projects/balazs-mate#readme">About</a>
+                    </li>
+
+                    <!-- starts: navbar elements available after login -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/web/bank/user/findAll">Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/web/bank/account/findAll">Bankaccounts</a>
+                    </li>
+                    <!-- ends: navbar elements available after login -->
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-md">
+        <div class="row p-1 mx-1 mt-1 justify-content-center">
+            <div class="col-md-10 rounded text-center  text-danger shadow fw-bold">
+                <p class="fs-6">Warning! This is a course project
+                    and created for educational purpose, all the data are generated randomly.</p>
+            </div>
+        </div>
+    </div>
+    <!-- ends: general without login -->
+
+    <div class="col-sm-9 col-md-6 col-lg-5 mx-auto">
+        <div class="card border-2 shadow-lg rounded-3 my-1">
+            <div class="card-body p-sm-5">
+                <h5 class="card-title text-center mb-3 fw-light fs-5">Lorem ipsum dolor sit amet consectetur adipisicing
+                    elit. Aut error consectetur delectus necessitatibus modi eligendi!</h5>
+            </div>
+        </div>
+
+
+        <!-- green sign-->
+        <div class="d-none d-md-block col-md-6 col-lg-5 mx-auto">
+            <div class="card-body p-3 p-sm-5"><img class="img-fluid d-none d-md-block"
+                    src="http://localhost:8080/jpg/green_mark.svg"
+                    onerror="this.src='localhost:8080/static/jpg/green_mark.svg';"></div>
+        </div>
+
+        <!-- red sign 
+        <div class="d-none">
+            <div class="card-body p-3 p-sm-5"><img class="img-fluid d-none d-md-block" src="jpg/red_mark.svg"
+                    onerror="this.src='../static/jpg/red_mark.svg';"></div>
+        </div>
+    -->
+        <div class="" th:text="${timestamp}">timestamp</div>
+        <div class="" th:text="${path}">path</div>
+        <div class="" th:text="${message}">message</div>
+        <div class="" th:text="${error}">error</div>
+        <div class="" th:text="${status}">status</div>
+
+        <div>Stacktrace<br>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima quo quisquam nobis natus quae, facilis
+            pariatur. Sint quos cupiditate enim odio ipsum repellat, at esse, saepe ducimus reprehenderit minima ea hic
+            illo tempora amet totam! Iure, alias at eaque cupiditate eum dolor, officia incidunt expedita quasi culpa
+            quia cum fugit quis asperiores eos mollitia et voluptas. Eum porro officiis pariatur tenetur, dolorem
+            corrupti saepe magnam. Odit cupiditate impedit itaque illum, dignissimos, facilis libero aspernatur
+            doloribus atque doloremque, quidem necessitatibus quaerat ipsam? Tenetur placeat, aut tempore esse eveniet
+            obcaecati officiis porro odit quisquam facilis magni. Similique reiciendis amet iste quia corporis quaerat
+            nam rem? Voluptatum nostrum veritatis quidem eligendi quasi quisquam ipsum quia provident odit, incidunt
+            maxime exercitationem modi ad eos? Saepe reiciendis, numquam aperiam, at optio cumque ducimus dolor
+            recusandae perspiciatis vel nostrum labore doloribus nemo asperiores deserunt qui, nam mollitia delectus
+            dolore ullam provident? Dignissimos debitis quibusdam ut nihil quo repellat corrupti rerum cupiditate et
+            minima. A ullam eius necessitatibus perferendis nihil odio beatae corrupti officiis quos architecto autem
+            aut maxime quas quia dolorem esse accusamus voluptatum, explicabo aliquid dolore vel quasi. Ipsa,
+            consectetur illo id magni asperiores suscipit esse. Dolorum nostrum aperiam architecto sed suscipit debitis,
+            repellat sint saepe, aspernatur delectus, provident ipsum! Maiores veniam nihil iure. Culpa nostrum cum,
+            unde rem voluptates dolor? Repudiandae nam ipsam cumque dignissimos minima mollitia voluptas illo reiciendis
+            optio, ex, obcaecati molestiae enim est tenetur voluptates vero explicabo aspernatur? Minima, cupiditate.
+            Doloremque in expedita sapiente veniam possimus aut esse quibusdam quae! Eius fugiat consequuntur vitae
+            repellat tempore repellendus nostrum quos laboriosam ratione voluptates, porro, quisquam aspernatur
+            voluptatem ut veniam cupiditate aliquid a iure recusandae quia vel. Laborum omnis nobis, architecto nulla
+            labore veritatis, a adipisci quisquam fuga quidem similique vero reiciendis animi quo at soluta maxime
+            accusantium aperiam tenetur nam facilis id.</div>
+
+    </div>
+    </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

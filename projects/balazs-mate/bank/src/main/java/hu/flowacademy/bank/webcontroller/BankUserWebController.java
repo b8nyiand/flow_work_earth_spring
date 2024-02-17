@@ -4,13 +4,12 @@ import hu.flowacademy.bank.model.BankUser;
 import hu.flowacademy.bank.model.Currency;
 import hu.flowacademy.bank.service.BankUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.NoSuchElementException;
 
 @Controller
 @RequestMapping("/web/bank/user/")
@@ -61,7 +60,12 @@ public class BankUserWebController {
 
     @GetMapping("/findByUsername/{username}")
     public String findByUsername(Model model, @PathVariable String username) {
-        model.addAttribute("user", bankUserService.findByUsername(username));
+        BankUser bankUser = bankUserService.findByUsername(username);
+        if (bankUser == null) {
+            throw new NoSuchElementException("There is no element with the given username");
+        }
+
+        model.addAttribute("user", bankUser);
         model.addAttribute("currencies", Currency.values());
         return "user_info";
     }
@@ -91,7 +95,7 @@ public class BankUserWebController {
 
         //create a boolean: isSuccessful, and this will the input of the printMessage method
         bankUserService.deleteByUsername(username);
-        return messageController.printMessage();
+        return messageController.printSuccessfullMessage();
     }
 
 }
