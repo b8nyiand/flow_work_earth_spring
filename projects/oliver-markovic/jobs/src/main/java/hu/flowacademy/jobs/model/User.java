@@ -17,7 +17,6 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Job> job;
 
-
     public User(String userName, String fullName, LocalDate creationDate) {
         this.username = userName;
         this.fullName = fullName;
