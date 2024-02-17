@@ -1,5 +1,6 @@
 package hu.flowacademy.ads.service;
 
+import hu.flowacademy.ads.dto.AdsResponseDTO;
 import hu.flowacademy.ads.exceptionHandler.NotFoundException;
 import hu.flowacademy.ads.model.Ad;
 import hu.flowacademy.ads.model.User;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class AdService {
@@ -73,6 +75,20 @@ public class AdService {
         return adOptional.orElseThrow(() ->
                 new NotFoundException(String.format("Not found Ad with this Id: %s", id))
         );
+    }
+
+    public List<AdsResponseDTO> adList(){
+        List<Ad> adList = adRepository.findAll();
+
+        return adList.stream().map(ad -> {
+            AdsResponseDTO adsResponseDTO = new AdsResponseDTO();
+            adsResponseDTO.setTitle(ad.getTitle());
+            adsResponseDTO.setPrice(ad.getPrice());
+            adsResponseDTO.setDescription(ad.getDescription());
+            adsResponseDTO.setCreationDate(ad.getCreationDate());
+            adsResponseDTO.setUserName(ad.getUser().getUserName());
+            return adsResponseDTO;
+        }).collect(Collectors.toList());
     }
 
 }

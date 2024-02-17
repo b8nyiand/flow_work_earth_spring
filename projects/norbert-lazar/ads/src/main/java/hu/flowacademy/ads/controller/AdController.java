@@ -1,5 +1,6 @@
 package hu.flowacademy.ads.controller;
 
+import hu.flowacademy.ads.dto.AdsResponseDTO;
 import hu.flowacademy.ads.model.Ad;
 import hu.flowacademy.ads.service.AdService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,5 +48,11 @@ public class AdController {
     @RequestMapping("/{id}")
     public Ad listAdById(@PathVariable Long id){
         return adService.listAdById(id);
+    }
+
+    @GetMapping
+    @RequestMapping("/list-all")
+    public List<AdsResponseDTO> adList(){
+        return adService.adList();
     }
 }

@@ -9,7 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 @Controller
 public class WebController {
@@ -21,6 +24,12 @@ public class WebController {
 
     @GetMapping("/")
     public String index(Model model){
+        model.addAttribute("users", userService.listAllUser());
+        return "index";
+    }
+
+    @GetMapping("/users")
+    public String users(Model model){
         model.addAttribute("users", userService.listAllUser());
         return "users";
     }
@@ -35,7 +44,7 @@ public class WebController {
     @PostMapping("/user_registration")
     public String saveCustomer(@ModelAttribute("user") User user) {
         userService.addUser(user);
-        return "redirect:/";
+        return "redirect:/users";
     }
 
     @GetMapping("/ad_registration")
@@ -45,19 +54,25 @@ public class WebController {
         return "adRegister_form";
     }
 
-    @PostMapping("/ad_registration")
+    @PostMapping("/ad_registration/{userName}")
     public String saveAdvertisement(@ModelAttribute("ad") Ad ad,
-                                    @ModelAttribute("userName") String userName) {
+                                    @PathVariable("userName") String userName) {
         adService.createAdForUser(userName, ad);
         return "redirect:/";
     }
 
-    // TODO: hogy lehet a userName-et rejtve küldeni???
-    @GetMapping("/advertisements")
-    public String listAdvertisement(Model model) {
-        String userName = "miki";
+    @GetMapping("/advertisements/{userName}")
+    public String listAdvertisement(@PathVariable String userName,
+                                    Model model) {
         model.addAttribute("adList", adService.listAdsByUserName(userName));
-        return "user_ad_list";
+        return "advertisements";
+
+    }
+
+    @GetMapping("/advertisements_all")
+    public String adsResponseDTOList(Model model){
+        model.addAttribute("adList", adService.adList());
+        return "advertisements_all";
     }
 
 }
