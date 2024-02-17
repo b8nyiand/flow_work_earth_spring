@@ -15,13 +15,11 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/add")
-    @ResponseStatus(HttpStatus.CREATED)
     public User addUser(@RequestBody User user) {
         return userService.addUser(user);
     }
 
     @PutMapping("/update")
-    @ResponseStatus(HttpStatus.OK)
     public User updateUser(@RequestBody User user) {
         return userService.updateUser(user);
     }

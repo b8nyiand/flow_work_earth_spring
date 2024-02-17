@@ -28,16 +28,25 @@ public class BankApplication {
     public CommandLineRunner runner() {
         return args -> {
             if (userRepository.findAll().isEmpty()) {
+                User user1 = new User("kallaya", "Kallay Andris", LocalDate.now());
+                userRepository.save(user1);
+                BankAccount bankAccount1 = new BankAccount("abc", 500, "HUF", "kallaya", LocalDate.now(), user1);
+                bankAccountRepository.save(bankAccount1);
 
-                User user = new User("username", "User Name", LocalDate.now());
-                userRepository.save(user);
-                User userEn = new User("ssimonlara", "Simon Lara", LocalDate.now());
-                userRepository.save(userEn);
+                User user2 = new User("ssimonlara", "Simon Lara", LocalDate.now());
+                userRepository.save(user2);
+                BankAccount bankAccount2 = new BankAccount("def", 4000, "EUR", "ssimonlara", LocalDate.now(), user2);
+                bankAccountRepository.save(bankAccount2);
 
-                BankAccount bankAccount = new BankAccount("num", 500, "HUF", "username", LocalDate.now(), user);
-                bankAccountRepository.save(bankAccount);
-                BankAccount bankAccountEn = new BankAccount("num", 4000, "EUR", "simonlara", LocalDate.now(), userEn);
-                bankAccountRepository.save(bankAccountEn);
+                User user3 = new User("kiskutya", "Kis Kutya", LocalDate.now());
+                userRepository.save(user3);
+                BankAccount bankAccount3 = new BankAccount("ghi", 2000, "HUF", "kiskutya", LocalDate.now(), user3);
+                bankAccountRepository.save(bankAccount3);
+
+                User user4 = new User("valaki", "Valaki valaki", LocalDate.now());
+                userRepository.save(user4);
+                BankAccount bankAccount4 = new BankAccount("jkl", 10000, "EUR", "valaki", LocalDate.now(), user4);
+                bankAccountRepository.save(bankAccount4);
             }
         };
     }
