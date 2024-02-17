@@ -30,8 +30,8 @@ public class BankApplication {
     CommandLineRunner runner() {
         return args -> {
             if (customerRepository.findAll().isEmpty()) {
-                Customer customer1 = new Customer("customer1", "Customer One", LocalDate.now());
-                Customer customer2 = new Customer("customer2", "Customer Two", LocalDate.now());
+                Customer customer1 = new Customer("proba1", "Customer One", LocalDate.now());
+                Customer customer2 = new Customer("proba2", "Tóth Tass", LocalDate.now());
                 customerRepository.save(customer1);
                 customerRepository.save(customer2);
 
