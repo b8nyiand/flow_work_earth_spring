@@ -9,5 +9,7 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<User, String> {
     List<User> findByFullName(String fullName);
     List<User> findByFullNameLike(String fullName);
+    List<User> findByUserName(String userName);
+
 
 }

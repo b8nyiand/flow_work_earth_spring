@@ -1,7 +1,9 @@
 package hu.flowacademy.ads.service;
 
 import hu.flowacademy.ads.model.Ad;
+import hu.flowacademy.ads.model.User;
 import hu.flowacademy.ads.repository.AdRepository;
+import hu.flowacademy.ads.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,8 @@ public class AdService {
 
     @Autowired
     private AdRepository adRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     public Ad addAd(Ad ad) {
         return adRepository.save(ad);
@@ -27,6 +31,17 @@ public class AdService {
     }
     public Ad updateAd(Ad ad) {
         return adRepository.save(ad);
+    }
+
+    public Ad updateAd(String userName, Ad ad) {
+        List<User> userList = userRepository.findByUserName(userName);
+        if (!userList.isEmpty()) {
+            User users1 = userList.get(0);
+            ad.setUser(users1);
+            return adRepository.save(ad);
+        } else {
+            throw new RuntimeException("No user found.");
+        }
     }
 
     public void deleteAd(Long id) {

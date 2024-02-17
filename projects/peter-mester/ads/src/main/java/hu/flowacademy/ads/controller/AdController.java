@@ -15,10 +15,9 @@ public class AdController {
     @Autowired
     AdService adService;
 
-    @PostMapping("/addAd")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Ad addAd(@RequestBody Ad ad) {
-        return adService.addAd(ad);
+    @PostMapping("/addAd/{userName}")
+    private Ad updateAd(@PathVariable String userName, @RequestBody Ad ad) {
+        return adService.updateAd(userName, ad);
     }
 
     @GetMapping("/findById/{id}")
