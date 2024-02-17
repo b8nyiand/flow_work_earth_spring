@@ -47,16 +47,18 @@ public class WebController {
         return "redirect:/users";
     }
 
-    @GetMapping("/ad_registration")
-    public String addAdvertisement(Model model) {
+    @GetMapping("/ad_registration/{userName}")
+    public String addAdvertisement(Model model,
+                                   @PathVariable("userName") String userName) {
         Ad ad = new Ad();
         model.addAttribute("ad", ad);
+        model.addAttribute("userName", userName);
         return "adRegister_form";
     }
 
-    @PostMapping("/ad_registration/{userName}")
+    @PostMapping("/ad_registration")
     public String saveAdvertisement(@ModelAttribute("ad") Ad ad,
-                                    @PathVariable("userName") String userName) {
+                                    @ModelAttribute("userName") String userName) {
         adService.createAdForUser(userName, ad);
         return "redirect:/";
     }
