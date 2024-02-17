@@ -43,4 +43,9 @@ public class AccountStatController {
     public List<BankAccount> howOldIsTheAccount(@PathVariable Integer numberOfDays){
         return accountStatService.howOldIsTheAccount(numberOfDays);
     }
+
+    @GetMapping("/creationIsAfter_Days/{numberOfDays}")
+    public List<BankAccount> howYoungIsTheAccount(@PathVariable Integer numberOfDays){
+        return accountStatService.howYoungIsTheAccount(numberOfDays);
+    }
 }

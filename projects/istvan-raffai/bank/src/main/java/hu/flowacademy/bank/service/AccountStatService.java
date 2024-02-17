@@ -61,4 +61,11 @@ public class AccountStatService {
                 .collect(Collectors.toList());
     }
 
+    public List<BankAccount> howYoungIsTheAccount(Integer numberOfDays){
+        return bankAccountRepository.findAll()
+                .stream()
+                .filter(x->x.getCreationDate().isAfter(LocalDate.now().minus(numberOfDays, ChronoUnit.DAYS)))
+                .collect(Collectors.toList());
+    }
+
 }
