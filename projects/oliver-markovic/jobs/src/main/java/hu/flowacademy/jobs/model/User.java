@@ -12,10 +12,16 @@ public class User {
     @Id
     private String username;
     private String fullName;
+    @Column(name = "creation_date")
     private LocalDate creationDate;
 
     @OneToMany(mappedBy = "user")
     private List<Job> job;
+
+    @PrePersist
+    protected void onCreate() {
+        creationDate = LocalDate.now();
+    }
 
     public User(String userName, String fullName, LocalDate creationDate) {
         this.username = userName;
