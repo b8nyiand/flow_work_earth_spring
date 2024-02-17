@@ -13,7 +13,7 @@ public class BankAccount {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String accountNumber;
-    private int balance;
+    public int balance;
     @Enumerated(EnumType.ORDINAL)
     private CurrencyType currency;
     @Column(name = "username", insertable = false, updatable = false)

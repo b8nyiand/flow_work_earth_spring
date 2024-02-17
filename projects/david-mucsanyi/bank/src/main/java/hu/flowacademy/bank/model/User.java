@@ -13,7 +13,7 @@ public class User {
     private String fullname;
     private LocalDate creationDate;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "bank_user")
     private List<BankAccount> bankAccount;
 
 

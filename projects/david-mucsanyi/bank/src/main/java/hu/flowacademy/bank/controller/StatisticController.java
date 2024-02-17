@@ -2,13 +2,14 @@ package hu.flowacademy.bank.controller;
 
 
 import hu.flowacademy.bank.model.BankAccount;
+import hu.flowacademy.bank.model.CurrencyType;
 import hu.flowacademy.bank.service.BankAccountService;
-import hu.flowacademy.bank.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequestMapping("/stats")
 @RestController
@@ -16,18 +17,40 @@ public class StatisticController {
 
     @Autowired
     private BankAccountService bankAccountService;
-    @Autowired
-    private UserService userService;
 
     @GetMapping("/findbyId/{id}")
     public Class<BankAccountService> findbyId(@PathVariable Long id) {
         return BankAccountService.class;
     }
 
+    @GetMapping("/greater_than")
+    public ResponseEntity<List<BankAccount>> getAccountsBalanceGreaterThan3000EUR() {
+        List<BankAccount> accounts = bankAccountService.getAccountsBalanceGreaterThan(3000);
+        return new ResponseEntity<>(accounts, HttpStatus.OK);
+    }
 
-    @GetMapping("/listUsersPoints/{points}")
-    public BankAccount findbyBalance(@PathVariable int balance) {
-        return userService.findbyBalance();
+    @GetMapping("/less_than")
+    public ResponseEntity<List<BankAccount>> getAccountsBalanceLessThan3000HUF() {
+        List<BankAccount> accounts = bankAccountService.getAccountsBalanceLessThan(3000, "HUF");
+        return new ResponseEntity<>(accounts, HttpStatus.OK);
+    }
+
+    @GetMapping("/currency_eur")
+    public ResponseEntity<List<BankAccount>> getAccountsByCurrencyEUR() {
+        List<BankAccount> accounts = bankAccountService.getAccountsByCurrency(CurrencyType.valueOf("EUR"));
+        return new ResponseEntity<>(accounts, HttpStatus.OK);
+    }
+
+    @GetMapping("/by_currency")
+    public ResponseEntity<List<BankAccount>> getAccountsByCurrency(@RequestParam String currency) {
+        List<BankAccount> accounts = bankAccountService.getAccountsByCurrency(CurrencyType.valueOf(currency));
+        return new ResponseEntity<>(accounts, HttpStatus.OK);
+    }
+
+    @GetMapping("/balance_higher")
+    public ResponseEntity<List<BankAccount>> getAccountsBalanceHigherThan(@RequestParam int balance) {
+        List<BankAccount> accounts = bankAccountService.getAccountsBalanceGreaterThan(balance);
+        return new ResponseEntity<>(accounts, HttpStatus.OK);
     }
 
 }

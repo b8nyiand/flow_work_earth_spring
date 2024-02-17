@@ -48,4 +48,13 @@ public class BankAccountService {
 
     }
 
+    public List<BankAccount> getAccountsBalanceGreaterThan(int balance) {
+        return bankAccountRepositry.findByBalanceGreaterThanAndCurrency(balance);
+    }
+
+    public List<BankAccount> getAccountsBalanceLessThan(int balance, String currency) {
+        return bankAccountRepositry.findByBalanceLessThanAndCurrency(balance, currency);
+    }
+
+
 }

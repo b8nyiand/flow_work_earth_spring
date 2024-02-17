@@ -14,5 +14,8 @@ public interface BankAccountRepositry extends JpaRepository<BankAccount, Long> {
 
     public List<BankAccount> getAccountsByCurrency(CurrencyType currencyType);
 
+    public List<BankAccount> findByBalanceGreaterThanAndCurrency(int balance);
+
+    List<BankAccount> findByBalanceLessThanAndCurrency(int balance, String currency);
 
 }
