@@ -61,12 +61,4 @@ public class BankUser {
         this.fullname = fullname;
     }
 
-//    public void setAddress(String address) {
-//        if (address == null || address.isEmpty()) {
-//            this.address = this.country + ", " + this.city;
-//        } else {
-//            this.address = address;
-//        }
-//    }
-
 }

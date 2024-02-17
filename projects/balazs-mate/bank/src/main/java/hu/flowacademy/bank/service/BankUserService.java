@@ -1,23 +1,16 @@
 package hu.flowacademy.bank.service;
 
 import hu.flowacademy.bank.exceptions.UserRegistrationException;
-import hu.flowacademy.bank.model.BankAccount;
 import hu.flowacademy.bank.model.BankUser;
-import hu.flowacademy.bank.model.Currency;
+import hu.flowacademy.bank.model.BankUserResponseDTO;
 import hu.flowacademy.bank.repository.BankUserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.time.LocalDate;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -46,6 +39,7 @@ public class BankUserService {
     }
 
     //---------------------------------------------------------------------------//
+
 
     public List<BankUser> findAll() {
         return bankUserRepository.findAll();
@@ -85,5 +79,14 @@ public class BankUserService {
 
     //---------------------------------------------------------------------------//
 
+    private static BankUserResponseDTO convertToDTOResponse(BankUser bankUser) {
+        BankUserResponseDTO bankUserResponseDTO = new BankUserResponseDTO();
+        bankUserResponseDTO.setFullname(bankUser.getFullname());
+        bankUserResponseDTO.setUsername(bankUser.getUsername());
+        bankUserResponseDTO.setCreationDate(bankUser.getCreationDate());
+        bankUserResponseDTO.setAddress(bankUser.getAddress());
+        bankUserResponseDTO.setAccounts(bankUser.getAccounts().size());
+        return bankUserResponseDTO;
+    }
 
 }

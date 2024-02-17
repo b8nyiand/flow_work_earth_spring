@@ -2,6 +2,7 @@ package hu.flowacademy.bank.controller;
 
 import hu.flowacademy.bank.model.BankAccount;
 import hu.flowacademy.bank.model.BankUser;
+import hu.flowacademy.bank.model.BankUserResponseDTO;
 import hu.flowacademy.bank.service.BankUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

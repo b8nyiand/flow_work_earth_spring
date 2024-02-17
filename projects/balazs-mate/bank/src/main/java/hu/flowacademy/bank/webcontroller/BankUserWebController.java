@@ -84,7 +84,6 @@ public class BankUserWebController {
     @GetMapping("/deleteByUsername/{username}")
     public String deleteByUsername(@PathVariable String username) {
 
-        //create a boolean: isSuccessful, and this will the input of the printMessage method
         bankUserService.deleteByUsername(username);
         return "redirect:/web/bank/message/action";
     }
@@ -93,7 +92,6 @@ public class BankUserWebController {
     @PostMapping("/deleteByUsername")
     public String deleteByUsernameGeneral(@RequestParam(name = "username") String username) {
 
-        //create a boolean: isSuccessful, and this will the input of the printMessage method
         bankUserService.deleteByUsername(username);
         return messageController.printSuccessfullMessage();
     }
