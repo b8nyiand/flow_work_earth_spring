@@ -5,6 +5,7 @@ import hu.flowacademy.jobs.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -12,15 +13,16 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public User addUser(User user) {                                                   // 1. User hozzáadása
+    public User addUser(User user) {
+
         return userRepository.save(user);
     }
 
-    public void deleteUser(String userName) {                                       // 2. User törlése username alapján
-        List <User> userToDelete = userRepository.findByUserName(userName);                // megvizsgálom, hogy ven e iyen username
-        if (!userToDelete.isEmpty()) {                                                 // ha van -> töröljük
+    public void deleteUser(String userName) {
+        List <User> userToDelete = userRepository.findByUserName(userName);
+        if (!userToDelete.isEmpty()) {
             userRepository.deleteAll(userToDelete);
-        } else {                                                                    // más esetben(nem talál username alapján Usert -> exception-t dob)
+        } else {
             throw new RuntimeException("A User nem található");
         }
     }

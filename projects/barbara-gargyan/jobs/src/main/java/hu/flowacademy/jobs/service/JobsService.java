@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.batch.BatchProperties;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -17,31 +18,41 @@ public class JobsService {
 
     @Autowired
     private UserRepository userRepository;
-                                                                            // 1. Job létrehozása meglévő Userhez
+
     public Jobs createJob(String userName, Jobs jobs) {
         List<User> users = userRepository.findByUserName(userName);
         if (!users.isEmpty()) {
             User user = users.get(0);
             jobs.setUser(user);
+
             return jobsRepository.save(jobs);
         } else {
             throw new RuntimeException("A felhasználó nem található: " + userName);
         }
     }
 
-    public Jobs updateJob(Jobs job) {                               // 2. Job módosítása
-        return jobsRepository.save(job);
+    public Jobs updateJob(String userName, Jobs updatedJob) {
+        List<Jobs> jobs = jobsRepository.findByUserName(userName);
+        if (!jobs.isEmpty()) {
+            Jobs existingJob = jobs.get(0);
+                      existingJob.setTitle(updatedJob.getTitle());
+            existingJob.setSalary(updatedJob.getSalary());
+            existingJob.setDescription(updatedJob.getDescription());
+            return jobsRepository.save(existingJob);
+        } else {
+            throw new RuntimeException("A felhasználóhoz nem található munka rögzítve: " + userName);
+        }
     }
 
-    public void deleteJob(Long id) {                                // 3. Job törlése
-        jobsRepository.deleteById(id);                              // a Job id-ja alapján töröl -> itt ez a PK
+    public void deleteJob(Long id) {
+        jobsRepository.deleteById(id);
     }
 
-    public List<Jobs> getJobsByUserName(String userName) {          // 4. userName alapján jobs-ok listázása
+    public List<Jobs> getJobsByUserName(String userName) {
         return jobsRepository.findByUserName(userName);
     }
 
-    public Jobs getJobById(Long id)                                 // 5. id alapján job lekérdezése
+    public Jobs getJobById(Long id)
     {
         return jobsRepository.findById(id).orElse(null);
     }
@@ -50,8 +61,12 @@ public class JobsService {
         return jobsRepository.findJobByTitle(title);
     }
 
-        public List<Jobs> getJobsWithSalaryGreaterThan(int salary) {
+     public List<Jobs> getJobsWithSalaryGreaterThan(int salary) {
         return jobsRepository.findBySalaryGreaterThan(salary);
+    }
+
+    public List<Jobs>listAllJobs(){
+        return jobsRepository.findAll();
     }
 }
 

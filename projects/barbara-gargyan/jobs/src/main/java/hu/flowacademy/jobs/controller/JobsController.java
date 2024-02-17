@@ -16,30 +16,35 @@ public class JobsController {
     @Autowired
     private JobsService jobsService;
 
-    @PostMapping("/createJob/{userName}")                                                       // 1. Job létrehozása meglévő Userhez
+    @PostMapping("/createJob/{userName}")
     @ResponseStatus(HttpStatus.CREATED)
     public Jobs createJob(@PathVariable String userName, @RequestBody Jobs job) {
         return jobsService.createJob(userName, job);
     }
 
-    @PutMapping("/update")                                                                     // 2. Job módosítása
-    public Jobs updateJob(@RequestBody Jobs job) {
-        return jobsService.updateJob(job);
+    @PutMapping("/updateJob/{userName}")
+    public Jobs updateJob(@PathVariable String userName, @RequestBody Jobs job) {
+        return jobsService.updateJob(userName, job);
     }
 
-    @DeleteMapping("/delete/{id}")                                                             // 3. Job törlése
-    public void deleteJob(@PathVariable Long id) {
+    @DeleteMapping("/deleteJobById/{id}")
+    public void deleteJobById(@PathVariable Long id) {
         jobsService.deleteJob(id);
     }
 
-    @GetMapping("/getJobsByUserName/{userName}")                                              // 4. userName alapján jobs-ok listázása
-    public List<Jobs> getJobsByUserName(@PathVariable String userName) {
+    @GetMapping("/listJobsByUserName/{userName}")
+    public List<Jobs> listJobsByUserName(@PathVariable String userName) {
         return jobsService.getJobsByUserName(userName);
     }
 
-    @GetMapping("/{id}")                                                                     // 5. id alapján job lekérdezése
+    @GetMapping("/getJobById/{id}")
 
     public Jobs getJobById(@PathVariable Long id) {
         return jobsService.getJobById(id);
+    }
+
+    @GetMapping("/listAllJobs")
+    public List<Jobs> listAllJobs() {
+        return jobsService.listAllJobs();
     }
 }

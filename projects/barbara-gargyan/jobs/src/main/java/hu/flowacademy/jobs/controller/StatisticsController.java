@@ -25,30 +25,33 @@ public class StatisticsController {
     @Autowired
     private JobsService jobsService;
 
-    @GetMapping("/high-salary")
+    @GetMapping("/salary1M")
     public List<Jobs> getJobsWithHighSalary() {
         return jobsRepository.findBySalaryGreaterThan(1000000);
     }
 
-    @GetMapping("/low-salary")
+    @GetMapping("/salary500k")
     public List<Jobs> getJobsWithLowSalary() {
         return jobsRepository.findBySalaryLessThan(500000);
     }
 
-    @GetMapping("/listUsersByFullName/{fullName}")
-    public List<User> listUsersByFullName(@PathVariable String fullName) {
-        return userRepository.findByFullName(fullName);
+    @GetMapping("/listMolnarUsers")
+    public List<User> listMolnarUsers() {
+        List<User> molnarUsers = userRepository.findByFullNameContaining("Molnar");
+        return molnarUsers;
     }
-    @GetMapping("findJobByTitle/{title}")
-    public List<Jobs>listJobByTitle(@PathVariable String title){
-        return jobsRepository.findJobByTitle(title);
+
+    @GetMapping("/springJobs")
+    public List<Jobs> getSpringJobs() {
+        List<Jobs> springJobs = jobsRepository.findByTitleContaining("spring");
+        return springJobs;
     }
 
     @GetMapping("/findJobBySalary/{salary}")
     public List<Jobs> findJobsWithHigherSalaryThan(@PathVariable int salary) {
         return jobsService.getJobsWithSalaryGreaterThan(salary);
     }
-    }
+}
 
 
 
