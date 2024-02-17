@@ -33,7 +33,7 @@ public class BankAccount {
         this.currency = currency;
         this.customer = customer;
         this.creationDate = creationDate;
-        this.username = username;
+        this.username = customer.getUsername();
     }
 
     @PrePersist
