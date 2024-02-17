@@ -44,7 +44,7 @@ public class JobsApplication {
                 Jobs job = new Jobs("séf", 1_000_000, "konyhai munka", "kissA", LocalDate.now(), user);
                 Jobs job1 = new Jobs("nővér", 600_000, "korházi munka", "molnar1", LocalDate.now(), user1);
                 Jobs job2 = new Jobs("takarító", 300_000, "intézmények takarítása", "molnarka", LocalDate.now(), user2);
-                Jobs job3 = new Jobs("spring", 1_100_000, "spring dev.", "springes", LocalDate.now(), user3);
+                Jobs job3 = new Jobs("spring", 1_100_000, "spring developer", "springes", LocalDate.now(), user3);
                 Jobs job4 = new Jobs("eladó", 480_000, "bolti eladó", "user", LocalDate.now(), user4);
 
                 jobsRepository.save(job);
