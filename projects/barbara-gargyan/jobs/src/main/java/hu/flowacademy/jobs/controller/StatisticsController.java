@@ -4,6 +4,7 @@ import hu.flowacademy.jobs.model.Jobs;
 import hu.flowacademy.jobs.model.User;
 import hu.flowacademy.jobs.repository.JobsRepository;
 import hu.flowacademy.jobs.repository.UserRepository;
+import hu.flowacademy.jobs.service.JobsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +22,9 @@ public class StatisticsController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private JobsService jobsService;
+
     @GetMapping("/high-salary")
     public List<Jobs> getJobsWithHighSalary() {
         return jobsRepository.findBySalaryGreaterThan(1000000);
@@ -33,16 +37,17 @@ public class StatisticsController {
 
     @GetMapping("/listUsersByFullName/{fullName}")
     public List<User> listUsersByFullName(@PathVariable String fullName) {
-        return userRepository.findByFullNameContaining(fullName);
+        return userRepository.findByFullName(fullName);
     }
-
     @GetMapping("findJobByTitle/{title}")
     public List<Jobs>listJobByTitle(@PathVariable String title){
         return jobsRepository.findJobByTitle(title);
     }
-    @GetMapping("findJobBySalary/{salary}")
-    public List<Jobs>listJobBySalary(@PathVariable Integer salary){
-        return jobsRepository.findJobBySalary(salary);
+
+    @GetMapping("/findJobBySalary/{salary}")
+    public List<Jobs> findJobsWithHigherSalaryThan(@PathVariable int salary) {
+        return jobsService.getJobsWithSalaryGreaterThan(salary);
+    }
     }
 
 
@@ -50,4 +55,4 @@ public class StatisticsController {
 
 
 
-}
+

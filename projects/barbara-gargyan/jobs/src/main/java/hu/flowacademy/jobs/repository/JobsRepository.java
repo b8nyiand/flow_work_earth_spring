@@ -9,11 +9,12 @@ public interface JobsRepository extends JpaRepository<Jobs,Long> {
     public List<Jobs> findByUserName(String userName);
 
    public List<Jobs> findBySalaryGreaterThan(int i);
+
    public List<Jobs> findBySalaryLessThan(int i);
 
    public List<Jobs>findJobByTitle(String title);
 
-   public List<Jobs>findJobBySalary(Integer salary);
+
 
 
 }

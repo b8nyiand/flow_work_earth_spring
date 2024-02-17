@@ -25,13 +25,13 @@ public class UserController {
         userService.deleteUser(userName);
     }
 
-    @PutMapping("/updateUser")
+    @PutMapping("/updateUser/{userName}")
     @ResponseStatus(HttpStatus.OK)
     public User updateUser(@RequestBody User user) {
         return userService.updateUser(user);
     }
 
-    @GetMapping("/listByUserName/{userName}")
+    @GetMapping("/listUsersByUserName/{userName}")
     public List<User> listUsersByUserName(@PathVariable String userName) {
         return userService.listUsersByUserName(userName);
     }

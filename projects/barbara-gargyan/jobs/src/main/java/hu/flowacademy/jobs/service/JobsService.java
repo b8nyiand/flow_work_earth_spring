@@ -50,8 +50,8 @@ public class JobsService {
         return jobsRepository.findJobByTitle(title);
     }
 
-    public List<Jobs> getJobBySalary(Integer salary){
-        return jobsRepository.findJobBySalary(salary);
+        public List<Jobs> getJobsWithSalaryGreaterThan(int salary) {
+        return jobsRepository.findBySalaryGreaterThan(salary);
     }
 }
 
