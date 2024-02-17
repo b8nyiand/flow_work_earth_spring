@@ -1,5 +1,6 @@
 package hu.flowacademy.bank.service;
 
+import hu.flowacademy.bank.exceptions.UserRegistrationException;
 import hu.flowacademy.bank.model.BankAccount;
 import hu.flowacademy.bank.model.BankUser;
 import hu.flowacademy.bank.model.Currency;
@@ -28,6 +29,12 @@ public class BankUserService {
     //---------------------------------------------------------------------------//
 
     public BankUser save(BankUser bankUser) {
+        if (bankUserRepository.findByUsername(bankUser.getUsername()) != null) {
+            throw new UserRegistrationException("This username is already used, be choose another one!");
+        }
+        if (bankUser.getUsername() == null || bankUser.getUsername().isEmpty()) {
+            throw new UserRegistrationException("Empty username, please type a username in order to registrate!");
+        }
         if (bankUser.getCreationDate() == null) {
             bankUser.setCreationDate(LocalDate.now());
         }

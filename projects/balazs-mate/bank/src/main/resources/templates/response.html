@@ -1,3 +1,4 @@
+<!doctype html>
 <html lang="en">
 
 <head>
@@ -69,11 +70,12 @@
 
     <div class="col-sm-9 col-md-6 col-lg-5 mx-auto">
 
+        <!-- If there is an exception, display this -->
         <div th:unless="${exception_message == null or exception_message == ''}" class="wrong">
 
             <div class="card border-2 shadow-lg rounded-3 my-1">
                 <div class="card-body p-sm-5">
-                    <h5 class="card-title text-center mb-3 fw-light fs-5">Something went wrong.</h5>
+                    <h5 class="card-title text-center mb-3 fw-light fs-5" th:text="${exception_messageForUser}">Something went wrong.</h5>
                     <h5 th:text="${exception_message}"></h5>
                 </div>
             </div>
