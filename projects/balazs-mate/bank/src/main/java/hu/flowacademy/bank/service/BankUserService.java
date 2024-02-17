@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +31,10 @@ public class BankUserService {
         if (bankUser.getCreationDate() == null) {
             bankUser.setCreationDate(LocalDate.now());
         }
+        if (bankUser.getAddress() == null || bankUser.getAddress().isEmpty()) {
+            bankUser.setAddress(bankUser.getCountry() + ", " + bankUser.getCity());
+        }
+
         return bankUserRepository.save(bankUser);
     }
 
@@ -48,10 +53,17 @@ public class BankUserService {
         return bankUserRepository.findByFullname(fullname);
     }
 
-
-    public List<BankUser> findByOptionalFUEA(String fullname, String username, String email, String address) {
-        return bankUserRepository.findByOptionalFUEA(fullname, username, email, address);
+    public List<BankUser> findByOptionalFUA(String fullname, String username, String address) {
+        return bankUserRepository.findByOptionalFUA(fullname, username, address);
     }
+
+    public List<BankUser> findByOptionalFUASorted(String fullname, String username, String address) {
+        return bankUserRepository.findByOptionalFUA(fullname, username, address)
+                .stream()
+                .sorted(Comparator.comparing(BankUser::getFullname))
+                .collect(Collectors.toList());
+    }
+
 
     //---------------------------------------------------------------------------//
     public BankUser update(BankUser bankUser) {

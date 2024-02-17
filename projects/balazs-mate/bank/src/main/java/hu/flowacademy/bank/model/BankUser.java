@@ -10,6 +10,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Getter
 @Setter
@@ -40,17 +41,19 @@ public class BankUser {
     @OneToMany(mappedBy = "bankUser")
     private List<BankAccount> accounts;
 
-    public BankUser(String username, String fullname, LocalDate creationDate, Boolean isAdmin) {
+    public BankUser(String username, String fullname, LocalDate creationDate, Boolean isAdmin, String address) {
         this.username = username;
         this.fullname = fullname;
         this.creationDate = creationDate;
         this.isAdmin = isAdmin;
+        this.address = address;
     }
 
-    public BankUser(String username, String fullname, LocalDate creationDate) {
+    public BankUser(String username, String fullname, LocalDate creationDate,  String address) {
         this.username = username;
         this.fullname = fullname;
         this.creationDate = creationDate;
+        this.address = address;
     }
 
     public BankUser(String username, String fullname) {
@@ -58,12 +61,12 @@ public class BankUser {
         this.fullname = fullname;
     }
 
-    public void setAddress(String address) {
-        if (address == null || address.isEmpty()) {
-            this.address = this.country + ", " + this.city;
-        } else {
-            this.address = address;
-        }
+//    public void setAddress(String address) {
+//        if (address == null || address.isEmpty()) {
+//            this.address = this.country + ", " + this.city;
+//        } else {
+//            this.address = address;
+//        }
+//    }
 
-    }
 }

@@ -67,24 +67,24 @@
             <div class="col-10">
                 <table class="table table-hover table-sm ">
                     <thead>
+                        <td>No.</td>
                         <td>Name</td>
                         <td>Username</td>
                         <td>Created</td>
-                        <td>Email</td>
                         <td>Address</td>
                         <td>Bankaccounts</td>
                     </thead>
                     <tbody class="table-group-divider">
 
                         <!--starts: repeated section!-->
-                        <tr th:each="user : ${allUser}">
-                            <td th:text="${user.fullname}"></td>
+                        <tr th:each="user, listIndex : ${allUser}">
+                            <td th:text="${listIndex.count}">1</td>
+                            <td th:text="${user.fullname}">Béla Kiss</td>
                             <td><a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
                                     th:text="${user.username}"
                                     th:href="@{'/web/bank/user/findByUsername/' + ${user.username}}">belakiss</a></td>
                             <td th:text="${user.creationDate}">2009.02.12</td>
-                            <td th:text="${user.email}">kisbela@akarmi.com</td>
-                            <td th:text="${user.address}">6725 Hungary, Szeged, Aranyos utca 119.</td>
+                            <td th:text="${user.address}">Hungary, Szeged, Aranyos utca 119.</td>
                             <td th:text="${user.accounts.size()}">13</td>
                         </tr>
                         <!--ends: repeated section!-->
@@ -105,19 +105,15 @@
 
                     <form class="row px-1 mx-1 mt-1 align-items-center justify-content-center"
                         action="/web/bank/user/search" method="post">
-                        <div class="col-md-5">
+                        <div class="col-md-4">
                             <label for="username" class="form-label">Username</label>
                             <input type="text" class="form-control" id="username" name="username">
                         </div>
-                        <div class="col-md-5">
+                        <div class="col-md-4">
                             <label for="fullname" class="form-label">Fullname</label>
                             <input type="text" class="form-control" id="fullname" name="fullname">
                         </div>
-                        <div class="col-md-5">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="text" class="form-control" id="email" name="email">
-                        </div>
-                        <div class="col-md-5">
+                        <div class="col-md-4">
                             <label for="inputAddress" class="form-label">Address</label>
                             <input type="text" class="form-control" id="inputAddress" name="address">
                         </div>

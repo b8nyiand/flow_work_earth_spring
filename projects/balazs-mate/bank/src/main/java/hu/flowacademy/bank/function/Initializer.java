@@ -6,11 +6,9 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import hu.flowacademy.bank.model.BankUser;
 import hu.flowacademy.bank.service.BankUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -21,7 +19,7 @@ public class Initializer {
     @Autowired
     BankUserService bankUserService;
 
-    public static List<BankUser> populateRepositories() {
+    public static List<BankUser> importBankUsers() {
 
         List<BankUser> list = new ArrayList<>();
 

@@ -43,8 +43,10 @@ public class BankUserController {
     }
 
     @GetMapping("/findByFUEA")
-    public List<BankUser> findByOptionalFUEA(@RequestParam(required = false, name = "fullname") String fullname, @RequestParam(required = false, name = "username") String username, @RequestParam(required = false, name = "email") String email, @RequestParam(required = false, name = "address") String address) {
-        return bankUserService.findByOptionalFUEA(fullname, username, email, address);
+    public List<BankUser> findByOptionalFUA(@RequestParam(required = false, name = "fullname") String fullname,
+                                             @RequestParam(required = false, name = "username") String username,
+                                             @RequestParam(required = false, name = "address") String address) {
+        return bankUserService.findByOptionalFUA(fullname, username, address);
     }
 
 

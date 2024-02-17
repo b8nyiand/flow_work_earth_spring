@@ -45,8 +45,11 @@ public class BankUserWebController {
     }
 
     @PostMapping("/search")
-    public String acceptSearch(Model model, @RequestParam(required = false, name = "fullname") String fullname, @RequestParam(required = false, name = "username") String username, @RequestParam(required = false, name = "email") String email, @RequestParam(required = false, name = "address") String address) {
-        model.addAttribute("allUser", bankUserService.findByOptionalFUEA(fullname, username, email, address));
+    public String acceptSearch(Model model,
+                               @RequestParam(required = false, name = "fullname") String fullname,
+                               @RequestParam(required = false, name = "username") String username,
+                               @RequestParam(required = false, name = "address") String address) {
+        model.addAttribute("allUser", bankUserService.findByOptionalFUASorted(fullname, username, address));
         return "users";
     }
 
