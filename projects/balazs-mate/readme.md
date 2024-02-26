@@ -98,7 +98,7 @@ During this project period:
 
 ## Author
 
-- Website - [Balázs Máté](https://github.com/matebolic/portfolio)
+- Website - [Balázs Máté](https://matebolic.github.io/portfolio/)
 - LinkedIn - [LinkedIn](https://www.linkedin.com/in/balmate)
 
 
