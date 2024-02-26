@@ -1,11 +1,11 @@
 # Bank system by Balázs Máté
-
 This solution was made as Flow Academy's junior java developeor course's final project.
 
 
 ## Table of contents
 
 - [Overview](#overview)
+  - [General info](#general-info)
   - [Requirements](#requirements)
 - [My process](#my-process)
   - [Built with](#built-with)
@@ -17,6 +17,11 @@ This solution was made as Flow Academy's junior java developeor course's final p
 
 
 ## Overview
+
+### General info
+According to the training schedule, the project phase lasted from 02.07.2024 to 02.17.2024, this was the
+implementation period, I could deal with the project in this interval.
+
 
 ### Requirements - given by Flow Academy
 The task is to create a banking API in Spring.
@@ -62,20 +67,20 @@ Main functions:
 - CRUD operations - accounts
 - CRUD operations - users
 - Search:
-	- the searches might use different number of fields, e.g. bancaccounts's searhc fields are:
+	- searches by arbitrary nu,ber of conditions, e.g. bancaccounts's search fields are:
 		- creation date after a choosen date
 		- creation date before a choosen date
 		- minimum balance value
 		- maximum balance value
 		- type of currency
-- Exception- and error handling
+- Exception and error handling
 
 
 ### Continued development
 There are several functions that I would like to implement:
-- createing login (Spring Security) + differing user/admin functionalities
+- create login (Spring Security) + differing user/admin functionalities
 - placing the application to the web (online DB and site hosting)
-- refinement of the data transfers' efficiency as using DTO-s
+- refinement of the data transfers' efficiency with using DTO-s
 - create new entity: transactions - users can transfer money between bankaccounts
 - since the base currency of the account can differ, an external API should be implemented to transfer money according to the actual exchange rates (e.g. Hungarian National Bank's Soap API)
 - Expansion of defensive programming solutions, expansion of indexing 
@@ -84,11 +89,11 @@ There are several functions that I would like to implement:
 ### What I learned
 
 During this project period:
-- creating various type of PQSL queries
-- exception- and errro handling
+- creating various type of JPQL queries
+- exception- and error handling
 - usage of Lombok 
-- BootStrap basics
-- connecting the frontend and the backend using Thymeleaf html templates
+- BootStrap
+- connecting the frontend and the backend using Thymeleaf HTML templates
 
 
 ## Author
